@@ -1,4 +1,4 @@
-package dp;
+// package dp;
 
 public class Lab2 {
 	
