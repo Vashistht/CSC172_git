@@ -19,7 +19,7 @@ It then asks you to continue the program or press "quit" to terminate the progra
 
 
 ## Compile and run steps
-(1) cd into src folder
+(1) cd src
 (2) javac Lab1.java
 (3) java Lab1
 (4) Enter string 1
