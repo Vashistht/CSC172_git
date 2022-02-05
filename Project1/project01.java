@@ -10,13 +10,29 @@ public class project01 {
 		String intAsString = "";
 		
 		for (int i = 0; i < 4; i++) {
-			for (int j = 0; j < 4; j++) {
-				if (array[i][j] == 0) {
-					System.out.printf("%-10s", "*");
-				} else {
-					intAsString = Integer.toString(array[i][j]);
-					System.out.printf("%-10s", intAsString);
-				}
+			if (array[i][0] == 0) {
+				System.out.printf("%-10s", "*");
+			} else {
+				intAsString = Integer.toString(array[i][0]);
+				System.out.printf("%-10s", intAsString);
+			}
+			if (array[i][1] == 0) {
+				System.out.printf("%-10s", "*");
+			} else {
+				intAsString = Integer.toString(array[i][1]);
+				System.out.printf("%-10s", intAsString);
+			}
+			if (array[i][2] == 0) {
+				System.out.printf("%-10s", "*");
+			} else {
+				intAsString = Integer.toString(array[i][2]);
+				System.out.printf("%-10s", intAsString);
+			}
+			if (array[i][3] == 0) {
+				System.out.printf("%-10s", "*");
+			} else {
+				intAsString = Integer.toString(array[i][3]);
+				System.out.printf("%-10s", intAsString);
 			}
 			System.out.print("\n" + "\n" + "\n" + "\n");
 		}
