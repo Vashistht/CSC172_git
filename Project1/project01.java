@@ -1,4 +1,4 @@
-// package dp;
+package dp;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -10,29 +10,13 @@ public class project01 {
 		String intAsString = "";
 		
 		for (int i = 0; i < 4; i++) {
-			if (array[i][0] == 0) {
-				System.out.printf("%-10s", "*");
-			} else {
-				intAsString = Integer.toString(array[i][0]);
-				System.out.printf("%-10s", intAsString);
-			}
-			if (array[i][1] == 0) {
-				System.out.printf("%-10s", "*");
-			} else {
-				intAsString = Integer.toString(array[i][1]);
-				System.out.printf("%-10s", intAsString);
-			}
-			if (array[i][2] == 0) {
-				System.out.printf("%-10s", "*");
-			} else {
-				intAsString = Integer.toString(array[i][2]);
-				System.out.printf("%-10s", intAsString);
-			}
-			if (array[i][3] == 0) {
-				System.out.printf("%-10s", "*");
-			} else {
-				intAsString = Integer.toString(array[i][3]);
-				System.out.printf("%-10s", intAsString);
+			for (int j = 0; j < 4; j++) {
+				if (array[i][j] == 0) {
+					System.out.printf("%-10s", "*");
+				} else {
+					intAsString = Integer.toString(array[i][j]);
+					System.out.printf("%-10s", intAsString);
+				}
 			}
 			System.out.print("\n" + "\n" + "\n" + "\n");
 		}
@@ -89,7 +73,7 @@ public class project01 {
 		
 		for (int i = 0; i < 4; i++) {
 			for (int j = 0; j < 4; j++) {
-				if (array[i][j] != 0) {
+				if (array[i][j] == 0) {
 					canPlaceNum = true;
 				}
 			}
@@ -98,7 +82,7 @@ public class project01 {
 		if (canPlaceNum == true) {
 			locationOfNum[0] = rand.nextInt(4);
 			locationOfNum[1] = rand.nextInt(4);
-			while (array[locationOfNum[0]][locationOfNum[1]] == 0) {
+			while (array[locationOfNum[0]][locationOfNum[1]] != 0) {
 				locationOfNum[0] = rand.nextInt(4);
 				locationOfNum[1] = rand.nextInt(4);
 			}
@@ -112,25 +96,111 @@ public class project01 {
 		return canPlaceNum;
 	}
 	
-	public static void moveInDirection(String dir, int[][] array) {
-		int placeHolder = 0;
+	public static int[][] moveInDirection(String dir, int[][] array) {		
+		int[][] compressedArray = new int[4][4];
 		
-		if (dir.equals("a")) {
-		
-		} else if (dir.equals("s")) {
-			
-		} else if (dir.equals("d")) {
-			
-		} else if (dir.equals("w")) {
-			
+		switch (dir) {
+		case "a":
+			for (int i = 0; i < 4; i++) {
+				for (int j = 0; j < 4; j++) {
+					compressedArray[i][j] = 0;
+					for (int k = j; k < 4; k++) {
+						if (compressedArray[i][j] == 0) {
+							compressedArray[i][j] += array[i][k];
+							array[i][k] = 0;
+						} else if (array[i][k] == 0) {
+							compressedArray[i][j] += array[i][k];
+						} else if (compressedArray[i][j] == array[i][k]) {
+							compressedArray[i][j] += array[i][k];
+							array[i][k] = 0;
+							break;
+						} else {
+							break;
+						}
+					}
+				}
+			}
+			break;
+		case "s":
+			for (int i = 0; i < 4; i++) {
+				for (int j = 3; j >= 0; j--) {
+					compressedArray[i][j] = 0;
+					for (int k = j; k >= 0; k--) {
+						if (compressedArray[j][i] == 0) {
+							compressedArray[j][i] += array[k][i];
+							array[k][i] = 0;
+						} else if (array[k][i] == 0) {
+							compressedArray[j][i] += array[k][i];
+						} else if (compressedArray[j][i] == array[k][i]) {
+							compressedArray[j][i] += array[k][i];
+							array[k][i] = 0;
+							break;
+						} else {
+							break;
+						}
+					}
+				}
+			}
+			break;
+		case "d":
+			for (int i = 0; i < 4; i++) {
+				for (int j = 3; j >= 0; j--) {
+					compressedArray[i][j] = 0;
+					for (int k = j; k >= 0; k--) {
+						if (compressedArray[i][j] == 0) {
+							compressedArray[i][j] += array[i][k];
+							array[i][k] = 0;
+						} else if (array[i][k] == 0) {
+							compressedArray[i][j] += array[i][k];
+						} else if (compressedArray[i][j] == array[i][k]) {
+							compressedArray[i][j] += array[i][k];
+							array[i][k] = 0;
+							break;
+						} else {
+							break;
+						}
+					}
+				}
+			}
+			break;
+		case "w":
+			for (int i = 0; i < 4; i++) {
+				for (int j = 0; j < 4; j++) {
+					compressedArray[i][j] = 0;
+					for (int k = j; k < 4; k++) {
+						if (compressedArray[j][i] == 0) {
+							compressedArray[j][i] += array[k][i];
+							array[k][i] = 0;
+						} else if (array[k][i] == 0) {
+							compressedArray[j][i] += array[k][i];
+						} else if (compressedArray[j][i] == array[k][i]) {
+							compressedArray[j][i] += array[k][i];
+							array[k][i] = 0;
+							break;
+						} else {
+							break;
+						}
+					}
+				}
+			}
 		}
+		
+		return compressedArray;
 	}
 	
 	public static void main(String[] args) {
 		Scanner scan = new Scanner(System.in);
+		int[][] myArray = createRandomArray();
+		print2Darray(myArray);
+		System.out.println();
 		
-		print2Darray(createRandomArray());
-		
+		while (true) {
+			System.out.println("Enter a dir:");
+			String userInput = scan.nextLine();
+			myArray = moveInDirection(userInput, myArray);
+			placeRandomNumber(myArray);
+			print2Darray(myArray);
+		}
 	}
 
 }
