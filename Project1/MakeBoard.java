@@ -36,6 +36,7 @@ public class MakeBoard {
         }
     }
 
+    // to initialise the random integer
     public static int[][] createRandomArray(){
         Random rand = new Random();
         int[][] buildArray = new int[4][4];
@@ -79,6 +80,7 @@ public class MakeBoard {
         return buildArray;
     }
 
+
     public static boolean placeRandomNumber(int[][] array) {
         Random rand = new Random();
         boolean canPlaceNum = false;
@@ -87,7 +89,7 @@ public class MakeBoard {
 
         for (int i = 0; i < 4; i++) {
             for (int j = 0; j < 4; j++) {
-                if (array[i][j] != 0) {
+                if (array[i][j] == 0) {
                     canPlaceNum = true;
                 }
             }
@@ -96,7 +98,7 @@ public class MakeBoard {
         if (canPlaceNum == true) {
             locationOfNum[0] = rand.nextInt(4);
             locationOfNum[1] = rand.nextInt(4);
-            while (array[locationOfNum[0]][locationOfNum[1]] == 0) {
+            while (array[locationOfNum[0]][locationOfNum[1]] != 0) {
                 locationOfNum[0] = rand.nextInt(4);
                 locationOfNum[1] = rand.nextInt(4);
             }
