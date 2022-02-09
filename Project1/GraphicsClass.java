@@ -1,4 +1,4 @@
-//package dp;
+package dp;
 
 import java.awt.GridLayout;
 import java.awt.Color;
@@ -301,23 +301,50 @@ public class GraphicsClass extends JComponent implements KeyListener{
     		for (int j = 0; j < 4; j++) {
     			roundRect = new RoundRectangle2D.Double(5 + 100*j, 5+100*i, 95, 95, 10, 10);
     			switch (arrayBoard[i][j]) {
+    			case 0:
+    				g2D.setColor(new Color(243, 230, 212 ));
+    				break;
     			case 2:
-    				g2D.setColor(Color.LIGHT_GRAY);
+    				g2D.setColor(new Color(255, 247, 185));
     				break;
     			case 4:
-    				g2D.setColor(Color.pink);
+    				g2D.setColor(new Color(255, 208, 128));
     				break;
     			case 8:
-    				g2D.setColor(Color.GREEN);
+    				g2D.setColor(new Color(255, 125, 113));
     				break;
-    			default:
-    				g2D.setColor(Color.WHITE);
+    			case 16:
+    				g2D.setColor(new Color(153, 212, 255));
+    				break;
+    			case 32:
+    				g2D.setColor(new Color(156, 234, 160));
+    				break;
+    			case 64:
+    				g2D.setColor(new Color(197, 156, 234));
+    				break;
+    			case 128:
+    				g2D.setColor(new Color(234, 156, 196 ));
+    				break;
+    			case 256:
+    				g2D.setColor(new Color(213, 234, 156));
+    				break;
+    			case 512:
+    				g2D.setColor(new Color(234, 156, 164));
+    				break;
+    			case 1024:
+    				g2D.setColor(new Color(231, 228, 141 ));
+    				break;
+    			case 2048:
+    				g2D.setColor(new Color(141, 231, 229 ));
+    				break;
     			}
     			g2D.fill(roundRect);
     			g2D.setColor(Color.BLACK);
-    			g2D.setFont(new Font("Dialog", Font.BOLD, 40));
-    			intToString = Integer.toString(arrayBoard[i][j]);
-    			g2D.drawString(intToString, 5+100*j +45, 5+100*i +45);
+    			if (arrayBoard[i][j] != 0) {
+    				g2D.setFont(new Font("Dialog", Font.BOLD, 40));
+        			intToString = Integer.toString(arrayBoard[i][j]);
+        			g2D.drawString(intToString, 5+100*j +45, 5+100*i +45);
+    			}
     		}
     	}
     }
