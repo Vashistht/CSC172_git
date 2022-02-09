@@ -384,7 +384,7 @@ public class GraphicsClass extends JComponent implements KeyListener{
     			g2D.fill(roundRect);
     			g2D.setColor(Color.BLACK);
     			if (arrayBoard[i][j] != 0) {
-    				g2D.setFont(new Font("Dialog", Font.BOLD, 40));
+    				g2D.setFont(new Font("Dialog", Font.BOLD, 20));
         			intToString = Integer.toString(arrayBoard[i][j]);
         			g2D.drawString(intToString, 5+100*j +45, 5+100*i +45);
     			}
