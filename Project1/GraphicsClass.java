@@ -1,4 +1,4 @@
-package dp;
+//package dp;
 
 import java.awt.GridLayout;
 import java.awt.Color;
@@ -19,34 +19,48 @@ import java.util.Random;
 import java.awt.Rectangle;
 
 
+/*
+This is the implementation of the 2048 game with graphics.
+The keys to move in a direction correspond to the arrow keys in the keyboard.
+The game ends when no more random numbers can be added or when the player has reached the score of 2048
+ */
 public class GraphicsClass extends JComponent implements KeyListener{
     private JPanel viewPanel = new JPanel();
     private JButton buttonArray[][] ;
     
-    protected int numValidMoves = 0;
-	protected int[][] arrayBoard = new int[4][4];
+    protected int numValidMoves = 0; // tracks the number of valid moves
+	protected int[][] arrayBoard = new int[4][4]; // stores the 2d array to be displayed on the board
 	protected int[][] tempArray = new int[4][4];
-	protected boolean sameBoard;
-	protected boolean continueGame = true;
-	
+	protected boolean sameBoard; // tracks if the 2d array is the same as the other
+	protected boolean continueGame = true; // the game continue if this boolean is true
+
+	// Constructor for the GraphicsClass
 	public GraphicsClass() {
 		super();
 		addKeyListener(this);
 		setFocusable(true);
 	}
-	
+
+	// the 2D array used to print the board
 	public int[][] getArrayBoard() {
 		return arrayBoard;
 	}
-	
+
+	// int: keeps track of number of valid moves
 	public int getNumValidMoves() {
 		return numValidMoves;
 	}
-	
+
+	// int: decreases valid moves by 1 (done when an action that is not a valid move is performed)
 	public void decNumValidMoves() {
 		numValidMoves -= 1;
 	}
-	
+
+	/*
+	print2Darray: takes in a 2D int array
+	prints: the 2D array with non zero integers and * for 0
+			along with a border marked by - and | to match the given formatting
+	 */
 	public static void print2Darray(int[][] array) {
 		String intAsString = "";
 		
@@ -84,31 +98,40 @@ public class GraphicsClass extends JComponent implements KeyListener{
 		}
 		System.out.println();
 	}
-	
+
+	/*
+	createRandomArray: returns 2D int array with
+	add more
+ 	*/
 	public int[][] createRandomArray(){
 		Random rand = new Random();
 		int[] determineIf4 = new int[2];
 		int[] location1 = new int[2];
 		int[] location2 = new int[2];
 		
-		determineIf4[0] = rand.nextInt(4);
-		determineIf4[1] = rand.nextInt(4);
+		determineIf4[0] = rand.nextInt(4);	 // creates a randon int from 0 to 4
+		determineIf4[1] = rand.nextInt(4);	// creates a randon int from 0 to 4
 		
 		location1[0] = rand.nextInt(4);
 		location1[1] = rand.nextInt(4);
 		location2[0] = rand.nextInt(4);
 		location2[1] = rand.nextInt(4);
+
 		while ((location1[0] == location2[0]) && (location1[1] == location2[1])) {
 			location2[0] = rand.nextInt(4);
 			location2[1] = rand.nextInt(4);
 		}
-		
+
+		// for location 1 if the random it is 0 (20 percent prob) add 4
+		// else add a 2 to the random array
 		if (determineIf4[0] == 0) {
 			arrayBoard[location1[0]][location1[1]] = 4;
 		} else {
 			arrayBoard[location1[0]][location1[1]] = 2;
 		}
-		
+
+		// for location2 if the random it is 0 (20 percent prob) add 4
+		// else add a 2 to the random array
 		if (determineIf4[1] == 0) {
 			arrayBoard[location2[0]][location2[1]] = 4;
 		} else {
@@ -126,13 +149,18 @@ public class GraphicsClass extends JComponent implements KeyListener{
 		}
 		return arrayBoard;
 	}
-	
+
+	/*
+	placeRandomNumber: returns a boolean canPlaceNum
+	false when we cannot add any more random numbers true when there is space to add random numbers
+	 */
 	public boolean placeRandomNumber() {
 		Random rand = new Random();
 		boolean canPlaceNum = false;
 		int[] locationOfNum = new int[2];
 		int determineIf4 = rand.nextInt(4);
-		
+
+		// if the (i, j) position is 0 means we can add random number 2 or 4
 		for (int i = 0; i < 4; i++) {
 			for (int j = 0; j < 4; j++) {
 				if (arrayBoard[i][j] == 0) {
@@ -140,7 +168,8 @@ public class GraphicsClass extends JComponent implements KeyListener{
 				}
 			}
 		}
-		
+
+		// adds the random number (2 and 4 with P = 80% and 20% respectively)
 		if (canPlaceNum == true) {
 			locationOfNum[0] = rand.nextInt(4);
 			locationOfNum[1] = rand.nextInt(4);
@@ -157,7 +186,12 @@ public class GraphicsClass extends JComponent implements KeyListener{
 		
 		return canPlaceNum;
 	}
-	
+
+	/*
+	moveInDirection: takes in a string dir correspond to direction
+	returns 2D int arrayboard after the move
+	- add more
+	*/
 	public int[][] moveInDirection(String dir) {		
 		int[][] compressedArray = new int[4][4];
 		sameBoard = true;
@@ -258,7 +292,8 @@ public class GraphicsClass extends JComponent implements KeyListener{
 			numValidMoves += 1;
 			break;
 		}
-		
+
+
 		for (int i = 0; i < 4; i++) {
 			for (int j = 0; j < 4; j++) {
 				arrayBoard[i][j] = compressedArray[i][j];
@@ -274,7 +309,10 @@ public class GraphicsClass extends JComponent implements KeyListener{
 		}
 		return arrayBoard;
 	}
-	
+
+	/*
+	getMaxElement returns the maximum element in the (2d int array) arrayBoard
+	 */
 	public int getMaxElement() {
 	    int max = 0;
 	    for (int i = 0; i < 4; i++) {
@@ -287,11 +325,16 @@ public class GraphicsClass extends JComponent implements KeyListener{
 	    return max;
 	}
 
+
 	@Override
 	public void paintComponent(Graphics g){
 	    paintRectangles(g, arrayBoard);
     }
-    
+
+	/*
+	- takes in a g, a Graphics object and 2d array
+	- sets the colors and fonts of the rectangles used to show the 4 x 4 grid on the JFrame
+	 */
     public void paintRectangles(Graphics g, int[][] array) {
     	RoundRectangle2D roundRect;
     	Graphics2D g2D = (Graphics2D) g;
@@ -352,14 +395,20 @@ public class GraphicsClass extends JComponent implements KeyListener{
 
     @Override
     public void keyTyped(KeyEvent e){
-        System.out.println("You typed: " + e.getKeyChar());
+//        System.out.println("You typed: " + e.getKeyChar());
     }
 
     @Override
     public void keyReleased(KeyEvent e){
-        System.out.println("You released: " + e.getKeyChar());
+//        System.out.println("You released: " + e.getKeyChar());
     }
 
+
+	/*
+	- executes the move in moveinDirection method based of the keyboard arrow keys
+	- if the board is the same as before, i.e, no valid move is made it prints "no valid move"
+	- prints the key pressed by the user
+	 */
     @Override
     public void keyPressed(KeyEvent e){
     	int keyCode = e.getKeyCode();
@@ -436,7 +485,8 @@ public class GraphicsClass extends JComponent implements KeyListener{
 		myGame.createRandomArray();
 		print2Darray(myGame.getArrayBoard());
 		myFrame.add(myGame);
-		myFrame.setSize(400,400);
+		myFrame.setSize(408, 431);
+//		myFrame.setPreferredSize( new Dimension(400, 400) );
 		myFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		myFrame.setVisible(true);
 
