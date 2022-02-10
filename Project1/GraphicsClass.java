@@ -32,9 +32,9 @@ public class GraphicsClass extends JComponent implements KeyListener{
 	protected int[][] arrayBoard = new int[4][4]; // stores the 2d array to be displayed on the board
 	protected int[][] tempArray = new int[4][4];
 	protected boolean sameBoard; // tracks if the 2d array is the same as the other
-	protected boolean continueGame = true; // the game continue if this boolean is true
-	protected boolean gameOver = false;
-	protected boolean gameRestarted = false;
+	protected boolean continueGame = true; // the game continue if this boolean is true; accounts for if the user pressed quit
+	protected boolean gameOver = false; // checks if the there are no more moves left
+	protected boolean gameRestarted = false; //checks if the user pressed restart
 
 	// Constructor for the GraphicsClass
 	public GraphicsClass() {
