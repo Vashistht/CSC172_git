@@ -102,8 +102,8 @@ public class GraphicsClass extends JComponent implements KeyListener{
 	}
 
 	/*
-	createRandomArray: returns 2D int array with
-	add more
+	    createRandomArray: returns 2D int array with the random 2 and or 4 and 0s
+
  	*/
 	public int[][] createRandomArray(){
 		Random rand = new Random();
@@ -196,7 +196,9 @@ public class GraphicsClass extends JComponent implements KeyListener{
 
 	/*
 	moveInDirection: takes in a string dir correspond to direction
-	returns 2D int arrayboard after the move
+	- returns the arrayboard after the move.
+    	- The move is made in say a direction when there is the same element adjacent (i, j+1) to the i, j element
+    	or when there is no non zero element between the two same integers
 	*/
 	public int[][] moveInDirection(String dir) {		
 		int[][] compressedArray = new int[4][4]; //Array of summed elements
@@ -211,7 +213,7 @@ public class GraphicsClass extends JComponent implements KeyListener{
 		
 		//Uses keys a,s,d,w to determine direction
 		switch (dir) {
-		case "a":
+		case "a": // moving left
 			for (int i = 0; i < 4; i++) {
 				for (int j = 0; j < 4; j++) {
 					compressedArray[i][j] = 0;
@@ -233,7 +235,7 @@ public class GraphicsClass extends JComponent implements KeyListener{
 			}
 			numValidMoves += 1; //Increases numValidMoves
 			break;
-		case "s":
+		case "s":	// moving right
 			for (int i = 0; i < 4; i++) {
 				for (int j = 3; j >= 0; j--) {
 					compressedArray[j][i] = 0;
@@ -255,7 +257,7 @@ public class GraphicsClass extends JComponent implements KeyListener{
 			}
 			numValidMoves += 1; //Increases numValidMoves
 			break;
-		case "d":
+		case "d":	// moving right
 			for (int i = 0; i < 4; i++) {
 				for (int j = 3; j >= 0; j--) {
 					compressedArray[i][j] = 0;
@@ -277,7 +279,7 @@ public class GraphicsClass extends JComponent implements KeyListener{
 			}
 			numValidMoves += 1; //Increases numValidMoves
 			break;
-		case "w":
+		case "w":	// moving up
 			for (int i = 0; i < 4; i++) {
 				for (int j = 0; j < 4; j++) {
 					compressedArray[j][i] = 0;
@@ -311,7 +313,7 @@ public class GraphicsClass extends JComponent implements KeyListener{
 		//Checks if same board to make sure valid move
 		checkSameBoard();
 		if (sameBoard == true) {
-			decNumValidMoves();
+			decNumValidMoves();	//  if the values between the new and the old move are the same then it is not a valid move
 		}
 		return arrayBoard;
 	}
@@ -344,6 +346,8 @@ public class GraphicsClass extends JComponent implements KeyListener{
 	
 	/*
 	 * checkSameBoard() - returns true if the same board results after moving in some direction
+	 boolean to see if the two 2D arrays (temparray and boardArray) are the same
+	 done by going through all the 16 elements and their corresponding location
 	 */
 	public boolean checkSameBoard() {
 		for (int i = 0; i < 4; i++) {
@@ -379,7 +383,10 @@ public class GraphicsClass extends JComponent implements KeyListener{
 		}
 	}
 
-
+	/*
+   	 in paintComponent, we set up the JFrame depending on the boolean values of game over, sameBoard ( for valid moves)
+    	quit, and reseting the board
+    	 */
 	@Override
 	public void paintComponent(Graphics g){
 	    String intToString;
@@ -650,7 +657,7 @@ public class GraphicsClass extends JComponent implements KeyListener{
         myFrame.setTitle("2048");
     	
     	GraphicsClass myGame = new GraphicsClass();
-		myGame.createRandomArray();
+		myGame.createRandomArray(); 
 		//(myGame.getArrayBoard());
 		myFrame.add(myGame);
 		myFrame.setSize(550, 600);
