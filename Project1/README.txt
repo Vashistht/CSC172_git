@@ -1,5 +1,12 @@
 Project 01
 Lab Partners: Livia Betti (lbetti), Vashisth Tiwari (vtiwari2)
+Livia Betti:
+Student ID: 31568890
+Email: lbetti@u.rochester.edu
+
+Vashisth Tiwari:
+Student ID:
+Email:
 
 This is the read me file for the 2048 game. The logic of our 2048 code is as follows:
 
