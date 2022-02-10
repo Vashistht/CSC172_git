@@ -550,6 +550,7 @@ public class GraphicsClass extends JComponent implements KeyListener{
 				//System.out.print("Number of Valid Moves: ");
 				//System.out.println(getNumValidMoves());
 				repaint();
+				System.out.println("You pressed: UP" );
 				break;
 			case KeyEvent.VK_DOWN :
 				countQuit = 0;
@@ -564,6 +565,7 @@ public class GraphicsClass extends JComponent implements KeyListener{
 				//System.out.print("Number of Valid Moves: ");
 				//System.out.println(getNumValidMoves());
 				repaint();
+				System.out.println("You pressed: DOWN" );
 				break;
 			case KeyEvent.VK_LEFT :
 				countQuit = 0;
@@ -578,6 +580,7 @@ public class GraphicsClass extends JComponent implements KeyListener{
 				//System.out.print("Number of Valid Moves: ");
 				//System.out.println(getNumValidMoves());
 				repaint();
+				System.out.println("You pressed: LEFT" );
 				break;
 			case KeyEvent.VK_RIGHT :
 				countQuit = 0;
@@ -592,6 +595,7 @@ public class GraphicsClass extends JComponent implements KeyListener{
 				//System.out.print("Number of Valid Moves: ");
 				//System.out.println(getNumValidMoves());
 				repaint();
+				System.out.println("You pressed: RIGHT" );
 				break;
 			case KeyEvent.VK_R:
 				if (countRestart == 0) {
@@ -608,6 +612,7 @@ public class GraphicsClass extends JComponent implements KeyListener{
 					countRestart = 0;
 					repaint();
 				}
+				System.out.println("You pressed: r" );
 				break;
 			case KeyEvent.VK_Q:
 				if (countQuit == 0) {
@@ -619,21 +624,23 @@ public class GraphicsClass extends JComponent implements KeyListener{
 					countQuit = 0;
 					repaint();
 				}
+				System.out.println("You pressed: q" );
 				break;
 			}
     		} else if ((gameOver == true) || (continueGame == false) || (getMaxElement() == 2048)) {
+    			//Checks if user restarts after they quit, lose, or win
     			repaint();
 				if (keyCode == KeyEvent.VK_R) {
+					//Resets global variables
 					continueGame = true;
 					numValidMoves = 0;
 					gameOver = false;
 					sameBoard = false;
 					arrayBoard = createRandomArray();
 					repaint();
+					System.out.println("You pressed: r" );
 				}
 		}
-    	
-        System.out.println("You pressed: " + e.getKeyChar());
     }
 
     public static void main (String[] args){
@@ -644,10 +651,9 @@ public class GraphicsClass extends JComponent implements KeyListener{
     	
     	GraphicsClass myGame = new GraphicsClass();
 		myGame.createRandomArray();
-		print2Darray(myGame.getArrayBoard());
+		//(myGame.getArrayBoard());
 		myFrame.add(myGame);
 		myFrame.setSize(550, 600);
-//		myFrame.setPreferredSize( new Dimension(400, 400) );
 		myFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		myFrame.setVisible(true);
 
