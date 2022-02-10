@@ -24,17 +24,16 @@ This is the implementation of the 2048 game with graphics.
 The keys to move in a direction correspond to the arrow keys in the keyboard.
 The game ends when no more random numbers can be added or when the player has reached the score of 2048
  */
-public class GraphicsClass extends JComponent implements KeyListener{
-    private JPanel viewPanel = new JPanel();
-    private JButton buttonArray[][] ;
-    
+public class GraphicsClass extends JComponent implements KeyListener{    
     protected int numValidMoves = 0; // tracks the number of valid moves
 	protected int[][] arrayBoard = new int[4][4]; // stores the 2d array to be displayed on the board
 	protected int[][] tempArray = new int[4][4];
 	protected boolean sameBoard; // tracks if the 2d array is the same as the other
-	protected boolean continueGame = true; // the game continue if this boolean is true; accounts for if the user pressed quit
-	protected boolean gameOver = false; // checks if the there are no more moves left
-	protected boolean gameRestarted = false; //checks if the user pressed restart
+	protected boolean continueGame = true; // the game continue if this boolean is true
+	protected boolean gameOver = false; //checks if there are no moves left
+	protected boolean gameRestarted = false; //checks if user pressed restart
+	protected int countRestart = 0; //Counts when user presses restart to ask for confirmation
+	protected int countQuit = 0; //Counts when user presses quit to ask for confirmation
 
 	// Constructor for the GraphicsClass
 	public GraphicsClass() {
@@ -342,6 +341,25 @@ public class GraphicsClass extends JComponent implements KeyListener{
 		}
 		return sameBoard;
 	}
+	
+	public void checkValidMove() {
+		gameOver = true;
+		for (int i = 0; i < 4; i++) {
+			for (int j = 0; j < 3; j++) {
+				if (arrayBoard[i][j] == arrayBoard[i][j+1]) {
+					gameOver = false;
+				}
+			}
+		}
+		
+		for (int i = 0; i < 3; i++) {
+			for (int j = 0; j < 4; j++) {
+				if (arrayBoard[i][j] == arrayBoard[i+1][j]) {
+					gameOver = false;
+				}
+			}
+		}
+	}
 
 
 	@Override
@@ -356,17 +374,27 @@ public class GraphicsClass extends JComponent implements KeyListener{
 		intToString = Integer.toString(numValidMoves);
 		g2D.drawString(intToString, 190, 430);
 		
-		if (sameBoard == true) {
+		if (countRestart == 1) {
 			g2D.setColor(Color.BLACK);
 			g2D.setFont(new Font("Dialog", Font.BOLD, 15));
-			g2D.drawString("Not a valid move.", 5, 470);
-			sameBoard = false;
+			g2D.drawString("Are you sure you want to restart? Press r to restart.", 5, 470);
+		}
+		
+		if (countQuit == 1) {
+			g2D.setColor(Color.BLACK);
+			g2D.setFont(new Font("Dialog", Font.BOLD, 15));
+			g2D.drawString("Are you sure you want to quit? Press q to quit.", 5, 470);
 		}
 		
 		if (gameOver == true) {
 			g2D.setColor(Color.BLACK);
 			g2D.setFont(new Font("Dialog", Font.BOLD, 15));
 			g2D.drawString("You lose. Press r to restart", 5, 470);
+		} else if (sameBoard == true) {
+			g2D.setColor(Color.BLACK);
+			g2D.setFont(new Font("Dialog", Font.BOLD, 15));
+			g2D.drawString("Not a valid move.", 5, 470);
+			sameBoard = false;
 		}
 		
 		if (continueGame == false) {
@@ -378,7 +406,7 @@ public class GraphicsClass extends JComponent implements KeyListener{
 		if (gameRestarted == true) {
 			g2D.setColor(Color.BLACK);
 			g2D.setFont(new Font("Dialog", Font.BOLD, 15));
-			g2D.drawString("You restarted. Press r to restart", 5, 470);
+			g2D.drawString("You restarted.", 5, 470);
 			gameRestarted = false;
 		}
     }
@@ -467,51 +495,80 @@ public class GraphicsClass extends JComponent implements KeyListener{
     	if ((continueGame == true) && (gameOver == false)) {
 			switch (keyCode) {
 			case KeyEvent.VK_UP :
+				countQuit = 0;
+				countRestart = 0;
 				moveInDirection("w");
-				if (placeRandomNumber() == false) {
-					gameOver = true;
+				if (sameBoard != true) {
+					if (placeRandomNumber() == false) {
+						checkValidMove();
+					}
 				}
 				//System.out.print("Number of Valid Moves: ");
 				//System.out.println(getNumValidMoves());
 				repaint();
 				break;
 			case KeyEvent.VK_DOWN :
+				countQuit = 0;
+				countRestart = 0;
 				moveInDirection("s");
-				if (placeRandomNumber() == false) {
-					gameOver = true;
+				if (sameBoard != true) {
+					if (placeRandomNumber() == false) {
+						checkValidMove();
+					}
 				}
 				//System.out.print("Number of Valid Moves: ");
 				//System.out.println(getNumValidMoves());
 				repaint();
 				break;
 			case KeyEvent.VK_LEFT :
+				countQuit = 0;
+				countRestart = 0;
 				moveInDirection("a");
-				if (placeRandomNumber() == false) {
-					gameOver = true;
+				if (sameBoard != true) {
+					if (placeRandomNumber() == false) {
+						checkValidMove();
+					}
 				}
 				//System.out.print("Number of Valid Moves: ");
 				//System.out.println(getNumValidMoves());
 				repaint();
 				break;
 			case KeyEvent.VK_RIGHT :
+				countQuit = 0;
+				countRestart = 0;
 				moveInDirection("d");
-				if (placeRandomNumber() == false) {
-					gameOver = true;
+				if (sameBoard != true) {
+					if (placeRandomNumber() == false) {
+						checkValidMove();
+					}
 				}
 				//System.out.print("Number of Valid Moves: ");
 				//System.out.println(getNumValidMoves());
 				repaint();
 				break;
 			case KeyEvent.VK_R:
-				arrayBoard = createRandomArray();
-				gameRestarted = true;
-				numValidMoves = 0;
-				gameOver = false;
-				repaint();
+				if (countRestart == 0) {
+					countRestart += 1;
+					repaint();
+				} else {
+					arrayBoard = createRandomArray();
+					gameRestarted = true;
+					numValidMoves = 0;
+					sameBoard = false;
+					gameOver = false;
+					countRestart = 0;
+					repaint();
+				}
 				break;
 			case KeyEvent.VK_Q:
-				continueGame = false;
-				repaint();
+				if (countQuit == 0) {
+					countQuit += 1;
+					repaint();
+				} else {
+					continueGame = false;
+					countQuit = 0;
+					repaint();
+				}
 				break;
 			}
     		} else if ((gameOver == true) || (continueGame == false)) {
@@ -520,12 +577,13 @@ public class GraphicsClass extends JComponent implements KeyListener{
 					continueGame = true;
 					numValidMoves = 0;
 					gameOver = false;
+					sameBoard = false;
 					arrayBoard = createRandomArray();
 					repaint();
 				}
 		}
     	
-        System.out.println("You pressed: " + e.getKeyChar());
+        //System.out.println("You pressed: " + e.getKeyChar());
     }
 
     public static void main (String[] args){
@@ -538,7 +596,7 @@ public class GraphicsClass extends JComponent implements KeyListener{
 		myGame.createRandomArray();
 		print2Darray(myGame.getArrayBoard());
 		myFrame.add(myGame);
-		myFrame.setSize(408, 431);
+		myFrame.setSize(550, 600);
 //		myFrame.setPreferredSize( new Dimension(400, 400) );
 		myFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		myFrame.setVisible(true);
