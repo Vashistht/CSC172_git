@@ -40,4 +40,5 @@ Description of methods used in the TwentyFourtyEight class
    quit, and restarting the board
    - paintRectangles: takes in the 2D array, sets the background color if the entries are 0
                       sets the colors for 2, 4, 8, 16, 32, 64, 128, 256, 512, 1024, and 2048.
-   -
+                      
+The graphics of the board (rectangles, using colors, printing text) was done as an additional feature.
