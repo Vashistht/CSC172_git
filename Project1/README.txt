@@ -5,7 +5,7 @@ Student ID: 31568890
 Email: lbetti@u.rochester.edu
 
 Vashisth Tiwari:
-Student ID:31564441
+Student ID: 31564441
 Email: vtiwari2@u.rochester.edu
 
 This is the read me file for the 2048 game. The logic of our 2048 code is as follows:
