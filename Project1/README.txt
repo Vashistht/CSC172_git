@@ -5,8 +5,8 @@ Student ID: 31568890
 Email: lbetti@u.rochester.edu
 
 Vashisth Tiwari:
-Student ID:
-Email:
+Student ID:31564441
+Email: vtiwari2@u.rochester.edu
 
 This is the read me file for the 2048 game. The logic of our 2048 code is as follows:
 
@@ -42,3 +42,9 @@ Description of methods used in the TwentyFourtyEight class
                       sets the colors for 2, 4, 8, 16, 32, 64, 128, 256, 512, 1024, and 2048.
                       
 The graphics of the board (rectangles, using colors, printing text) was done as an additional feature.
+
+
+
+Compile steps
+- javac TwentyFourtyEight.java && java TwentyFourtyEight.java
+
