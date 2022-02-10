@@ -47,4 +47,3 @@ The graphics of the board (rectangles, using colors, printing text) was done as 
 
 Compile steps
 - javac TwentyFourtyEight.java && java TwentyFourtyEight.java
-
