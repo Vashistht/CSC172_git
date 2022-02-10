@@ -33,6 +33,8 @@ public class GraphicsClass extends JComponent implements KeyListener{
 	protected int[][] tempArray = new int[4][4];
 	protected boolean sameBoard; // tracks if the 2d array is the same as the other
 	protected boolean continueGame = true; // the game continue if this boolean is true
+	protected boolean gameOver = false;
+	protected boolean gameRestarted = false;
 
 	// Constructor for the GraphicsClass
 	public GraphicsClass() {
@@ -109,8 +111,8 @@ public class GraphicsClass extends JComponent implements KeyListener{
 		int[] location1 = new int[2];
 		int[] location2 = new int[2];
 		
-		determineIf4[0] = rand.nextInt(4);	 // creates a randon int from 0 to 4
-		determineIf4[1] = rand.nextInt(4);	// creates a randon int from 0 to 4
+		determineIf4[0] = rand.nextInt(4);	 // creates a random int from 0 to 4
+		determineIf4[1] = rand.nextInt(4);	// creates a random int from 0 to 4
 		
 		location1[0] = rand.nextInt(4);
 		location1[1] = rand.nextInt(4);
@@ -156,9 +158,9 @@ public class GraphicsClass extends JComponent implements KeyListener{
 	 */
 	public boolean placeRandomNumber() {
 		Random rand = new Random();
-		boolean canPlaceNum = false;
 		int[] locationOfNum = new int[2];
 		int determineIf4 = rand.nextInt(4);
+		boolean canPlaceNum = false;
 
 		// if the (i, j) position is 0 means we can add random number 2 or 4
 		for (int i = 0; i < 4; i++) {
@@ -300,12 +302,9 @@ public class GraphicsClass extends JComponent implements KeyListener{
 			}
 		}
 		
-		for (int i = 0; i < 4; i++) {
-			for (int j = 0; j < 4; j++) {
-				if (arrayBoard[i][j] != tempArray[i][j]) {
-					sameBoard = false;
-				}
-			}
+		checkSameBoard();
+		if (sameBoard == true) {
+			decNumValidMoves();
 		}
 		return arrayBoard;
 	}
@@ -324,11 +323,64 @@ public class GraphicsClass extends JComponent implements KeyListener{
 	    }
 	    return max;
 	}
+	
+	public void resetTempArray() {
+		for (int i = 0; i < 4; i++) {
+			for (int j = 0; j < 4; j++) {
+				tempArray[i][j] = arrayBoard[i][j];
+			}
+		}
+	}
+	
+	public boolean checkSameBoard() {
+		for (int i = 0; i < 4; i++) {
+			for (int j = 0; j < 4; j++) {
+				if (arrayBoard[i][j] != tempArray[i][j]) {
+					sameBoard = false;
+				}
+			}
+		}
+		return sameBoard;
+	}
 
 
 	@Override
 	public void paintComponent(Graphics g){
+	    String intToString;
 	    paintRectangles(g, arrayBoard);
+	    
+	    Graphics2D g2D = (Graphics2D) g;
+	    g2D.setColor(Color.BLACK);
+		g2D.setFont(new Font("Dialog", Font.BOLD, 15));
+		g2D.drawString("Number of Valid Moves", 5, 430);
+		intToString = Integer.toString(numValidMoves);
+		g2D.drawString(intToString, 190, 430);
+		
+		if (sameBoard == true) {
+			g2D.setColor(Color.BLACK);
+			g2D.setFont(new Font("Dialog", Font.BOLD, 15));
+			g2D.drawString("Not a valid move.", 5, 470);
+			sameBoard = false;
+		}
+		
+		if (gameOver == true) {
+			g2D.setColor(Color.BLACK);
+			g2D.setFont(new Font("Dialog", Font.BOLD, 15));
+			g2D.drawString("You lose. Press r to restart", 5, 470);
+		}
+		
+		if (continueGame == false) {
+			g2D.setColor(Color.BLACK);
+			g2D.setFont(new Font("Dialog", Font.BOLD, 15));
+			g2D.drawString("You quit. Press r to restart", 5, 470);
+		}
+		
+		if (gameRestarted == true) {
+			g2D.setColor(Color.BLACK);
+			g2D.setFont(new Font("Dialog", Font.BOLD, 15));
+			g2D.drawString("You restarted. Press r to restart", 5, 470);
+			gameRestarted = false;
+		}
     }
 
 	/*
@@ -412,64 +464,65 @@ public class GraphicsClass extends JComponent implements KeyListener{
     @Override
     public void keyPressed(KeyEvent e){
     	int keyCode = e.getKeyCode();
-    	if (continueGame == true) {
+    	if ((continueGame == true) && (gameOver == false)) {
 			switch (keyCode) {
 			case KeyEvent.VK_UP :
 				moveInDirection("w");
-				if (sameBoard == true) {
-					decNumValidMoves();
-					System.out.println("Not a valid move.");
-				} else {
-					placeRandomNumber();
+				if (placeRandomNumber() == false) {
+					gameOver = true;
 				}
-				System.out.print("Number of Valid Moves: ");
-				System.out.println(getNumValidMoves());
+				//System.out.print("Number of Valid Moves: ");
+				//System.out.println(getNumValidMoves());
 				repaint();
 				break;
 			case KeyEvent.VK_DOWN :
 				moveInDirection("s");
-				if (sameBoard == true) {
-					decNumValidMoves();
-					System.out.println("Not a valid move.");
-				} else {
-					placeRandomNumber();
+				if (placeRandomNumber() == false) {
+					gameOver = true;
 				}
-				System.out.print("Number of Valid Moves: ");
-				System.out.println(getNumValidMoves());
+				//System.out.print("Number of Valid Moves: ");
+				//System.out.println(getNumValidMoves());
 				repaint();
 				break;
 			case KeyEvent.VK_LEFT :
 				moveInDirection("a");
-				if (sameBoard == true) {
-					decNumValidMoves();
-					System.out.println("Not a valid move.");
-				} else {
-					placeRandomNumber();
+				if (placeRandomNumber() == false) {
+					gameOver = true;
 				}
-				System.out.print("Number of Valid Moves: ");
-				System.out.println(getNumValidMoves());
+				//System.out.print("Number of Valid Moves: ");
+				//System.out.println(getNumValidMoves());
 				repaint();
 				break;
 			case KeyEvent.VK_RIGHT :
 				moveInDirection("d");
-				if (sameBoard == true) {
-					decNumValidMoves();
-					System.out.println("Not a valid move.");
-				} else {
-					placeRandomNumber();
+				if (placeRandomNumber() == false) {
+					gameOver = true;
 				}
-				System.out.print("Number of Valid Moves: ");
-				System.out.println(getNumValidMoves());
+				//System.out.print("Number of Valid Moves: ");
+				//System.out.println(getNumValidMoves());
 				repaint();
 				break;
 			case KeyEvent.VK_R:
 				arrayBoard = createRandomArray();
+				gameRestarted = true;
+				numValidMoves = 0;
+				gameOver = false;
 				repaint();
 				break;
 			case KeyEvent.VK_Q:
 				continueGame = false;
+				repaint();
 				break;
 			}
+    		} else if ((gameOver == true) || (continueGame == false)) {
+    			repaint();
+				if (keyCode == KeyEvent.VK_R) {
+					continueGame = true;
+					numValidMoves = 0;
+					gameOver = false;
+					arrayBoard = createRandomArray();
+					repaint();
+				}
 		}
     	
         System.out.println("You pressed: " + e.getKeyChar());
