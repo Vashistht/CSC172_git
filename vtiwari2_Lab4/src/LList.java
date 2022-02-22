@@ -107,12 +107,9 @@ class LList<E> implements List<E> {
         if(curr.next() == null) return null;
         return curr.next().element();
     }
-// Extra stuff not printed in the book.
 
     /**
      * Generate a human-readable representation of this list's contents
-     * that looks something like this: < 1 2 3 | 4 5 6 >.  The vertical
-     * bar represents the current location of the fence.  This method
      * uses toString() on the individual elements.
      * @return The string representation of this list
      */
@@ -140,17 +137,70 @@ class LList<E> implements List<E> {
         moveToPos(oldPos); // Reset the fence to its original position
         return out.toString();
     }
-    // a test client added by EZ to test the List operations
 
-    // print items in list from <first> to <last>
-    public void printList() {
-        Link<E> temp = head;
-        while(temp!=null){
-            System.out.print(getValue()+" ");
-            temp = temp.next();
-        }
-        System.out.println();
-    }
+//    /** Printer */
+//    public void printList() {
+//        Link<E> temp = head;
+//        while(temp!=null){
+//            System.out.print(getValue()+" ");
+//            temp = temp.next();
+//        }
+//        System.out.println();
+//    }
+//
+//
+//    //Checks to see if sequence is DNA
+//    public static boolean checkNodesDNA(Link<E> head){
+//        Link<E> current = head;
+//        while(current != null){
+//            if( getValue() == 'A'){
+//                current = current.next();
+//            } else if (getValue()  == 'C'){
+//                current = current.next();
+//            } else if (getValue()  == 'T'){
+//                current = current.next();
+//            } else if (getValue() == 'G'){
+//                current = current.next();
+//            } else {
+//                return false;
+//
+//            }
+//        }
+//        return true;
+//    }
+//
+//
+//    //Checks to see if sequence is RNA
+//    public static boolean checkNodesRNA(Link<E> head){
+//        Link<E> current = head;
+//        while(current != null){
+//            if( getValue() == 'A'){
+//                current = current.next();
+//            } else if (getValue()  == 'C'){
+//                current = current.next();
+//            } else if (getValue()  == 'G'){
+//                current = current.next();
+//            } else if (getValue() == 'U'){
+//                current = current.next();
+//            } else {
+//                return false;
+//            }
+//        }
+//        return true;
+//    }
+//
+//    //reverse the list, need this for transcribing RNA, DNA sequences
+//    public static Link<E> reversedList(Link<E> current){
+//        Link<E> current = current;
+//        Link<E> prev = null;
+//        while(current != null){
+//            Link<E> temp = current.next();
+//            current.setNext() = prev;
+//            prev = current;
+//            current = temp;
+//        }
+//        return prev;
+//        }
 
     public static void main(String[] args) {
         LList<Integer> list = new LList<>();
@@ -168,16 +218,10 @@ class LList<E> implements List<E> {
         list.next();
         System.out.println("Moving to the next element");
         System.out.println(list.length());
-        System.out.println("Final list: " + list);reverseList
-        LList<Integer> llist = list;
+        System.out.println("Final list: " + list);
 
-        llist.printList();
+//        list.printList();
     }
 
 }
-
-
-
-
-
 
