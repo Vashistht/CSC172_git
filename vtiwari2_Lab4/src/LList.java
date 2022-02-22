@@ -5,36 +5,51 @@
  */
 
 /** Linked list implementation */
-class LList implements List {
-    private Node head;         // Pointer to list header
-    private Node tail;         // Pointer to last element
-    protected Node curr;       // Access to current element
+class LList<E> implements List<E> {
+    private Link<E> head;         // Pointer to list header
+    private Link<E> tail;         // Pointer to last element
+    protected Link<E> curr;       // Access to current element
     int cnt;		      // Size of list
 
     /** Constructors */
     LList(int size) { this(); }   // Constructor -- Ignore size
     LList() {
-        curr = tail = head = new Node(null); // Create header
+        curr = tail = head = new Link<E>(null); // Create header
         cnt = 0;
+    }
+
+    /** Singly linked list node */
+    class Link<E> {
+        private E element; // Value for this node
+        private Link<E> next; // Pointer to next node in list
+        // Constructors
+        Link(E it, Link<E> nextval)
+        { element = it; next = nextval; }
+        Link(Link<E> nextval) { next = nextval; }
+        Link<E> next() { return next; } // Return next field
+        Link<E> setNext(Link<E> nextval) // Set next field
+        { return next = nextval; } // Return element field
+        E element() { return element; } // Set element field
+        E setElement(E it) { return element = it; }
     }
 
     /** Remove all elements */
     public void clear() {
         head.setNext(null);         // Drop access to links
-        curr = tail = head = new Node(null); // Create header
+        curr = tail = head = new Link<E>(null); // Create header
         cnt = 0;
     }
 
     /** Insert "it" at current position */
     public void insert(E it) {
-        curr.setNext(new Node(it, curr.next()));
+        curr.setNext(new Link<E>(it, curr.next()));
         if (tail == curr) tail = curr.next();  // New tail
         cnt++;
     }
 
     /** Append "it" to list */
     public void append(E it) {
-        tail = tail.setNext(new Node(it, null));
+        tail = tail.setNext(new Link<E>(it, null));
         cnt++;
     }
 
@@ -58,7 +73,7 @@ class LList implements List {
     /** Move curr one step left; no change if now at front */
     public void prev() {
         if (curr == head) return; // No previous element
-        Node temp = head;
+        Link<E> temp = head;
         // March down list until we find the previous element
         while (temp.next() != curr) temp = temp.next();
         curr = temp;
@@ -73,7 +88,7 @@ class LList implements List {
 
     /** @return The position of the current element */
     public int currPos() {
-        Node temp = head;
+        Link<E> temp = head;
         int i;
         for (i=0; curr != temp; i++)
             temp = temp.next();
@@ -88,7 +103,7 @@ class LList implements List {
     }
 
     /** @return Current element value */
-    public char getValue() {
+    public E getValue() {
         if(curr.next() == null) return null;
         return curr.next().element();
     }
@@ -107,43 +122,43 @@ class LList implements List {
         int oldPos = currPos();
         int length = length();
         StringBuffer out = new StringBuffer((length() + 1) * 4);
-//
+
         moveToStart();
-//        out.append("< ");
+        out.append("< ");
         for (int i = 0; i < oldPos; i++) {
             out.append(getValue());
-            out.append(", ");
+            out.append(" ");
             next();
         }
-//        out.append("| ");
-//        for (int i = oldPos; i < length; i++) {
-//            out.append(getValue());
-//            out.append(" ");
-//            next();
-//        }
-//        out.append(">");
-//        moveToPos(oldPos); // Reset the fence to its original position
+        out.append("| ");
+        for (int i = oldPos; i < length; i++) {
+            out.append(getValue());
+            out.append(" ");
+            next();
+        }
+        out.append(">");
+        moveToPos(oldPos); // Reset the fence to its original position
         return out.toString();
     }
     // a test client added by EZ to test the List operations
 
     public static void main(String[] args) {
         LList<Integer> list = new LList<>();
-//        System.out.println("Initial list: " + list);
-//        list.append(3);
-//        System.out.println("After appending 3: " + list);
-//        list.moveToEnd();
-//        System.out.println("After moving to the end: " + list);
-//        list.insert(8);
-//        System.out.println("After inserting 8: " + list);
-//        list.append(10);
-//        System.out.println("After appending 10: " + list);
-//        list.insert(2);
-//        System.out.println("After inserting 2: " + list);
-//        list.next();
-//        System.out.println("Moving to the next element");
-//        System.out.println(list.length());
-//        System.out.println("Final list: " + list);
+        System.out.println("Initial list: " + list);
+        list.append(3);
+        System.out.println("After appending 3: " + list);
+        list.moveToEnd();
+        System.out.println("After moving to the end: " + list);
+        list.insert(8);
+        System.out.println("After inserting 8: " + list);
+        list.append(10);
+        System.out.println("After appending 10: " + list);
+        list.insert(2);
+        System.out.println("After inserting 2: " + list);
+        list.next();
+        System.out.println("Moving to the next element");
+        System.out.println(list.length());
+        System.out.println("Final list: " + list);
     }
 
 }
