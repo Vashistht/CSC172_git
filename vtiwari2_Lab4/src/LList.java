@@ -124,23 +124,33 @@ class LList<E> implements List<E> {
         StringBuffer out = new StringBuffer((length() + 1) * 4);
 
         moveToStart();
-        out.append("< ");
+//        out.append("< ");
         for (int i = 0; i < oldPos; i++) {
             out.append(getValue());
             out.append(" ");
             next();
         }
-        out.append("| ");
+//        out.append("| ");
         for (int i = oldPos; i < length; i++) {
             out.append(getValue());
             out.append(" ");
             next();
         }
-        out.append(">");
+//        out.append(">");
         moveToPos(oldPos); // Reset the fence to its original position
         return out.toString();
     }
     // a test client added by EZ to test the List operations
+
+    // print items in list from <first> to <last>
+    public void printList() {
+        Link<E> temp = head;
+        while(temp!=null){
+            System.out.print(getValue()+" ");
+            temp = temp.next();
+        }
+        System.out.println();
+    }
 
     public static void main(String[] args) {
         LList<Integer> list = new LList<>();
@@ -158,7 +168,10 @@ class LList<E> implements List<E> {
         list.next();
         System.out.println("Moving to the next element");
         System.out.println(list.length());
-        System.out.println("Final list: " + list);
+        System.out.println("Final list: " + list);reverseList
+        LList<Integer> llist = list;
+
+        llist.printList();
     }
 
 }
