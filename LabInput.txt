@@ -1,0 +1,12 @@
+insert 0 DNA AATTCCGGAATTCCGG
+insert 2 RNA UAGACAUGGAUU
+insert 1 DNA ABCDE
+insert 1 RNA TTTT
+insert 4 DNA AATTCCGGAATTCCGG
+print
+remove 1
+remove 4
+print
+print 0
+print 2
+print 4
