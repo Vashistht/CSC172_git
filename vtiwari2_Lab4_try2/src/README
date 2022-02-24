@@ -1,0 +1,18 @@
+Michael Kingsley
+mkingsl6
+MW 3:25
+
+This lab was designed to help us better understand how linked lists work and how to implement them. As well, we put
+something new, linked lists, with something we already knew how to work with, arrays. Nevertheless, even though
+we should be familiar with arrays by now, since in this case we had to store linked lists in the arrays, it was
+challenging.
+
+The lab was slightly ambiguous, so my interpretation of the lab was that the sequence array would store linked lists.
+Any changes to the sequence such as clipping or transcribing would happen to the sequence array as well.
+
+NOTE: When using command line, you must have the path of the testing file, for example, this is how I tested my code:
+
+                        java DNAList.java <array-size> /Users/mzking/Downloads/CSC172/Testing.txt
+
+NOTE: I used code from class for the List.java and LList.java, both of which are posted on BlackBoard.
+
