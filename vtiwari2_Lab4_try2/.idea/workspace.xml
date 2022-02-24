@@ -5,17 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="4191972d-c00c-4abc-a98d-f3091d0c654b" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/output.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/README.txt" beforeDir="false" afterPath="$PROJECT_DIR$/README.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Array.class" beforeDir="false" afterPath="$PROJECT_DIR$/src/Array.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Array.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Array.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/DNAList.class" beforeDir="false" afterPath="$PROJECT_DIR$/src/DNAList.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/DNAList.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DNAList.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/LList.class" beforeDir="false" afterPath="$PROJECT_DIR$/src/LList.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/LList.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/LList.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/List.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/List.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/README" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -96,7 +87,8 @@
       <workItem from="1645654565999" duration="4683000" />
       <workItem from="1645660930465" duration="4587000" />
       <workItem from="1645672716935" duration="4532000" />
-      <workItem from="1645678774747" duration="265000" />
+      <workItem from="1645678774747" duration="496000" />
+      <workItem from="1645679295889" duration="91000" />
     </task>
     <servers />
   </component>
