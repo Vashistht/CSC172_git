@@ -75,7 +75,7 @@ public class DNAList {
                 } else if(seperateCommand.length == 2){
                     int pos = Integer.parseInt(seperateCommand[1]);
                     if(arrFilled[pos].equals(Status.FILLED))
-                        arr.printArrElement(Integer.parseInt(seperateCommand[1]), arrLinks);
+                        arr.printElementArray(Integer.parseInt(seperateCommand[1]), arrLinks);
                     else if(arrFilled[pos].equals(Status.EMPTY)){
                         System.out.println("No sequence to print at specified position");
                     }
@@ -87,6 +87,7 @@ public class DNAList {
                 int end = Integer.parseInt(seperateCommand[3]);
                 LList.Link newHead = lList.clipList(pos, start, end, arrLinks);
                 arr.nodeArray(pos, arrFilled, newHead);
+                
                 //Copying sequences
             } else if(seperateCommand[0].toLowerCase().equals("copy")){
                 int pos1 = Integer.parseInt(seperateCommand[1]);
@@ -94,6 +95,7 @@ public class DNAList {
                 LList.Link copy = lList.copyList(pos1, arrLinks);
                 arrFilled[pos2] = Status.FILLED;
                 arr.nodeArray(pos2, arrFilled, copy);
+                
                 //Transcribing sequences
             } else if(seperateCommand[0].toLowerCase().equals("transcribe")){
                 int pos = Integer.parseInt(seperateCommand[1]);

@@ -124,7 +124,7 @@ public class LList implements List {
 //    }
 
     /** prints from the given node (temp)*/
-    public static void printNodes(Link temp){
+    public static void printLinks(Link temp){
         Link current = temp;
         while(current != null){
             System.out.print(current);

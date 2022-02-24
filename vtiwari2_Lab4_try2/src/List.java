@@ -1,3 +1,4 @@
+/** List interface which is implemented in LList*/
 public interface List {
     
     public int size(LList.Link[] arr, int index);
