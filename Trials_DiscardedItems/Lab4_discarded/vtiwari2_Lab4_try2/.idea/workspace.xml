@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="4191972d-c00c-4abc-a98d-f3091d0c654b" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/../../../livia_lab4/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../livia_lab4/.idea/misc.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../livia_lab4/.idea/modules.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../livia_lab4/.idea/vcs.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../livia_lab4/DNAList.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../livia_lab4/LList.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../livia_lab4/LabInput.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../livia_lab4/List.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../livia_lab4/List.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../livia_lab4/Sequences.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../livia_lab4/livia_lab4.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../livia_lab4/package-info.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../vtiwari2_Lab4/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../vtiwari2_Lab4/.idea/misc.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../vtiwari2_Lab4/.idea/modules.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../vtiwari2_Lab4/Lab4.docx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../vtiwari2_Lab4/command.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../vtiwari2_Lab4/src/DNAList.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../vtiwari2_Lab4/src/LList$Link.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../vtiwari2_Lab4/src/LList.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../vtiwari2_Lab4/src/LList.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../vtiwari2_Lab4/src/List.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../vtiwari2_Lab4/src/List.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../vtiwari2_Lab4/updatedoutfile" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../vtiwari2_Lab4/vtiwari2_Lab4.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../vtiwari2_Lab4/~$Lab4.docx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../vtiwari2_Lab4_try2/.idea/.name" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../vtiwari2_Lab4_try2/.idea/description.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../vtiwari2_Lab4_try2/.idea/encodings.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../vtiwari2_Lab4_try2/.idea/misc.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../vtiwari2_Lab4_try2/.idea/modules.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../vtiwari2_Lab4_try2/.idea/project-template.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../vtiwari2_Lab4_try2/.idea/uiDesigner.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../vtiwari2_Lab4_try2/.idea/vcs.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../vtiwari2_Lab4_try2/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../../vtiwari2_Lab4_try2/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../vtiwari2_Lab4_try2/README.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../vtiwari2_Lab4_try2/command.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../vtiwari2_Lab4_try2/output.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../vtiwari2_Lab4_try2/src/Array.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../vtiwari2_Lab4_try2/src/Array.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../vtiwari2_Lab4_try2/src/DNAList$Filled.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../vtiwari2_Lab4_try2/src/DNAList$Status.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../vtiwari2_Lab4_try2/src/DNAList$Type.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../vtiwari2_Lab4_try2/src/DNAList.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../vtiwari2_Lab4_try2/src/DNAList.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../vtiwari2_Lab4_try2/src/LList$Link.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../vtiwari2_Lab4_try2/src/LList$Node.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../vtiwari2_Lab4_try2/src/LList.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../vtiwari2_Lab4_try2/src/LList.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../vtiwari2_Lab4_try2/src/LinkedList$Node.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../vtiwari2_Lab4_try2/src/LinkedList.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../vtiwari2_Lab4_try2/src/List.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../vtiwari2_Lab4_try2/src/List.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../vtiwari2_Lab4_try2/src/command.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../vtiwari2_Lab4_try2/updatedoutfile" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../vtiwari2_Lab4_try2/vtiwari2_Lab4_try2.iml" beforeDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Interface" />
+        <option value="Class" />
+        <option value="Enum" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../../.." />
+  </component>
+  <component name="GitSEFilterConfiguration">
+    <file-type-list>
+      <filtered-out-file-type name="LOCAL_BRANCH" />
+      <filtered-out-file-type name="REMOTE_BRANCH" />
+      <filtered-out-file-type name="TAG" />
+      <filtered-out-file-type name="COMMIT_BY_MESSAGE" />
+    </file-type-list>
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectId" id="1iWTQjKLpwhCzUMrAsqi9qf7G3K" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="com.intellij.ide.scratch.ScratchImplUtil$2/New Scratch File" value="GitIgnore" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="node.js.detected.package.eslint" value="true" />
+    <property name="node.js.detected.package.tslint" value="true" />
+    <property name="node.js.selected.package.eslint" value="(autodetect)" />
+    <property name="node.js.selected.package.tslint" value="(autodetect)" />
+    <property name="nodejs_package_manager_path" value="npm" />
+  </component>
+  <component name="RunManager">
+    <configuration name="Main" type="Application" factoryName="Application" temporary="true">
+      <option name="MAIN_CLASS_NAME" value="DNAList" />
+      <module name="mkingsl6_Lab4" />
+      <option name="WORKING_DIRECTORY" value="file://$PROJECT_DIR$" />
+      <RunnerSettings RunnerId="Run" />
+      <ConfigurationWrapper RunnerId="Run" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.Main" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="4191972d-c00c-4abc-a98d-f3091d0c654b" name="Default Changelist" comment="" />
+      <created>1602022334637</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1602022334637</updated>
+      <workItem from="1645654549478" duration="8000" />
+      <workItem from="1645654565999" duration="4683000" />
+      <workItem from="1645660930465" duration="4587000" />
+      <workItem from="1645672716935" duration="4532000" />
+      <workItem from="1645678774747" duration="496000" />
+      <workItem from="1645679295889" duration="91000" />
+      <workItem from="1645818090077" duration="322000" />
+      <workItem from="1645819103793" duration="45000" />
+      <workItem from="1645819315073" duration="72000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/LList.java</url>
+          <line>6</line>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+  </component>
+</project>

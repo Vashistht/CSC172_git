@@ -1,227 +1,310 @@
-/** Source code example for "A Practical Introduction to Data
- Structures and Algorithm Analysis, 3rd Edition (Java)"
- by Clifford A. Shaffer
- Copyright 2008-2011 by Clifford A. Shaffer
- */
-
+/*
+Source:
+reversing the linked list: https://www.geeksforgeeks.org/reverse-a-linked-list/
+*/
 /** Linked list implementation */
-class LList<E> implements List<E> {
-    private Link<E> head;         // Pointer to list header
-    private Link<E> tail;         // Pointer to last element
-    protected Link<E> curr;       // Access to current element
-    int cnt;		      // Size of list
+
+public class LList implements List {
+    private Link head;         // Pointer to list head
+    private Link tail;         // Pointer to list tail
+    private int cnt;        // current number of elements in the list
 
     /** Constructors */
-    LList(int size) { this(); }   // Constructor -- Ignore size
-    LList() {
-        curr = tail = head = new Link<E>(null); // Create header
-        cnt = 0;
+    public LList() {
+        head = null;
+        tail = null;
     }
 
     /** Singly linked list node */
-    class Link<E> {
-        private E element; // Value for this node
-        private Link<E> next; // Pointer to next node in list
-        // Constructors
-        Link(E it, Link<E> nextval)
-        { element = it; next = nextval; }
-        Link(Link<E> nextval) { next = nextval; }
-        Link<E> next() { return next; } // Return next field
-        Link<E> setNext(Link<E> nextval) // Set next field
-        { return next = nextval; } // Return element field
-        E element() { return element; } // Set element field
-        E setElement(E it) { return element = it; }
+    class Link {
+        private char element;        // Value stored in the node
+        private Link next;     // pointer to what follows
+
+        Link(char it, Link nextElement) {
+            element = it;
+            next = nextElement;
+        }
+
+        Link(char it){
+            element = it;
+        }
+
+        Link(){
+        }
+
+        Link getNext() {
+            return next;
+        }  // getter for the <next> pointer
+
+        Link setNext(Link nextElement){
+            return next = nextElement;
+        }
+
+        char getElement(){
+            return element;
+        }
+
+        int setElement(char it){
+            return element = it;
+        }
+
+        /**
+         * Generate a human-readable representation of this list's contents
+         * uses toString() on the individual elements.
+         */
+        public String toString(){
+            return element + "";
+        }
     }
 
-    /** Remove all elements */
-    public void clear() {
-        head.setNext(null);         // Drop access to links
-        curr = tail = head = new Link<E>(null); // Create header
-        cnt = 0;
+    public boolean isEmpty(){
+        return cnt==0;
     }
 
-    /** Insert "it" at current position */
-    public void insert(E it) {
-        curr.setNext(new Link<E>(it, curr.next()));
-        if (tail == curr) tail = curr.next();  // New tail
+    public int size(Link[] arr, int index){
+        int size = 1;
+        Link current = arr[index];
+        while(current.next != null){
+            size++;
+            current = current.getNext();
+        }
+        return size;
+    }
+
+    /** add elements from the head */
+    public void addFront(char it){
+        head = new Link(it, head);
         cnt++;
     }
 
-    /** Append "it" to list */
-    public void append(E it) {
-        tail = tail.setNext(new Link<E>(it, null));
-        cnt++;
+    /** add to that loc */
+    public void append(char it) {
+        Link newnode = new Link();
+        newnode.element = it;
+        newnode.next = null;
     }
 
-    /** Remove and return current element */
-    public E remove() {
-        if (curr.next() == null) return null; // Nothing to remove
-        E it = curr.next().element();         // Remember value
-        if (tail == curr.next()) tail = curr; // Removed last
-        curr.setNext(curr.next().next());     // Remove from list
-        cnt--;				// Decrement count
-        return it;                            // Return value
+    /** remove element from head */
+    public char removeFront(){
+        char it = head.getElement();
+        head = head.next;
+        cnt--;
+        return it;
     }
 
-    /** Set curr at list start */
-    public void moveToStart()
-    { curr = head; }
-    /** Set curr at list end */
-    public void moveToEnd()
-    { curr = tail; }
-
-    /** Move curr one step left; no change if now at front */
-    public void prev() {
-        if (curr == head) return; // No previous element
-        Link<E> temp = head;
-        // March down list until we find the previous element
-        while (temp.next() != curr) temp = temp.next();
-        curr = temp;
+    /**  add elements from the tail*/
+    public void addLast(char it){
+        Link newest = new Link(it, null);
+        tail.setNext(newest);
+        tail = newest;
     }
 
-    /** Move curr one step right; no change if now at end */
-    public void next()
-    { if (curr != tail) curr = curr.next(); }
-
-    /** @return List length */
-    public int length() { return cnt; }
-
-    /** @return The position of the current element */
-    public int currPos() {
-        Link<E> temp = head;
-        int i;
-        for (i=0; curr != temp; i++)
-            temp = temp.next();
-        return i;
-    }
-
-    /** Move down list to "pos" position */
-    public void moveToPos(int pos) {
-        assert (pos>=0) && (pos<=cnt) : "Position out of range";
-        curr = head;
-        for(int i=0; i<pos; i++) curr = curr.next();
-    }
-
-    /** @return Current element value */
-    public E getValue() {
-        if(curr.next() == null) return null;
-        return curr.next().element();
-    }
-
-    /**
-     * Generate a human-readable representation of this list's contents
-     * uses toString() on the individual elements.
-     * @return The string representation of this list
-     */
-    public String toString()
-    {
-        // Save the current position of the list
-        int oldPos = currPos();
-        int length = length();
-        StringBuffer out = new StringBuffer((length() + 1) * 4);
-
-        moveToStart();
-//        out.append("< ");
-        for (int i = 0; i < oldPos; i++) {
-            out.append(getValue());
-            out.append(" ");
-            next();
+    /** Create new list from head and return it */
+    public Link newList(int index, String input, Link[] arr){
+        arr[index] = new Link(input.charAt(0));
+        Link current = arr[index];
+        for(int i = 1; i < input.length() ; i++){
+            Link newLink = new Link(input.charAt(i));
+            newLink.element = input.charAt(i);
+            newLink.next = null;
+            current.setNext(newLink);
+            current = current.getNext();
         }
-//        out.append("| ");
-        for (int i = oldPos; i < length; i++) {
-            out.append(getValue());
-            out.append(" ");
-            next();
-        }
-//        out.append(">");
-        moveToPos(oldPos); // Reset the fence to its original position
-        return out.toString();
+        return arr[index];
     }
 
-//    /** Printer */
+//    /** print elements in list (head to tail) */
 //    public void printList() {
-//        Link<E> temp = head;
-//        while(temp!=null){
-//            System.out.print(getValue()+" ");
-//            temp = temp.next();
+//        Link pos = head;
+//        while(pos!=null){
+//            System.out.print(pos.getElement()+" ");
+//            pos = pos.getNext();
 //        }
 //        System.out.println();
 //    }
-//
-//
-//    //Checks to see if sequence is DNA
-//    public static boolean checkNodesDNA(Link<E> head){
-//        Link<E> current = head;
-//        while(current != null){
-//            if( getValue() == 'A'){
-//                current = current.next();
-//            } else if (getValue()  == 'C'){
-//                current = current.next();
-//            } else if (getValue()  == 'T'){
-//                current = current.next();
-//            } else if (getValue() == 'G'){
-//                current = current.next();
-//            } else {
-//                return false;
-//
-//            }
-//        }
-//        return true;
-//    }
-//
-//
-//    //Checks to see if sequence is RNA
-//    public static boolean checkNodesRNA(Link<E> head){
-//        Link<E> current = head;
-//        while(current != null){
-//            if( getValue() == 'A'){
-//                current = current.next();
-//            } else if (getValue()  == 'C'){
-//                current = current.next();
-//            } else if (getValue()  == 'G'){
-//                current = current.next();
-//            } else if (getValue() == 'U'){
-//                current = current.next();
-//            } else {
-//                return false;
-//            }
-//        }
-//        return true;
-//    }
-//
-//    //reverse the list, need this for transcribing RNA, DNA sequences
-//    public static Link<E> reversedList(Link<E> current){
-//        Link<E> current = current;
-//        Link<E> prev = null;
-//        while(current != null){
-//            Link<E> temp = current.next();
-//            current.setNext() = prev;
-//            prev = current;
-//            current = temp;
-//        }
-//        return prev;
-//        }
 
-    public static void main(String[] args) {
-        LList<Integer> list = new LList<>();
-        System.out.println("Initial list: " + list);
-        list.append(3);
-        System.out.println("After appending 3: " + list);
-        list.moveToEnd();
-        System.out.println("After moving to the end: " + list);
-        list.insert(8);
-        System.out.println("After inserting 8: " + list);
-        list.append(10);
-        System.out.println("After appending 10: " + list);
-        list.insert(2);
-        System.out.println("After inserting 2: " + list);
-        list.next();
-        System.out.println("Moving to the next element");
-        System.out.println(list.length());
-        System.out.println("Final list: " + list);
-
-//        list.printList();
+    /** prints from the given node (temp)*/
+    public static void printLinks(Link temp){
+        Link current = temp;
+        while(current != null){
+            System.out.print(current);
+            current = current.getNext();
+        }
+        System.out.println();
     }
 
+    /** Clips the selected sequence at starting and ending index
+     ** New clipped sequence replaces old sequence
+     ** returns new sequence at desired position */
+    public Link clipList(int pos, int start, int end, Link[] arr){
+
+        if(DNAList.arrFilled[pos].equals(DNAList.Status.EMPTY)){
+            System.out.println("No sequence to clip at specified position");
+        } else if(DNAList.arrFilled[pos].equals(DNAList.Status.FILLED)){
+            if(start < 0){
+                System.out.println("Invalid start index");
+            } else if(start > size(arr, pos)){
+                System.out.println("Start index out of bounds");
+            } else if(end > size(arr, pos)){
+                System.out.println("End index out of bounds");
+            } else if(end < start) {
+                arr[pos].setElement('\0');
+            } else if((start < size(arr, pos)) && (end < size(arr, pos))){
+                Link current = arr[pos];
+                for(int s = start-1; s > 0; s--){
+                    current = current.getNext();
+                }
+                Link newList = null;
+                Link tail = null;
+                while(current!= null && (start <= end)){
+                    if(newList == null){
+                        newList = new Link(current.getElement(),null);
+                        tail = newList;
+                    } else{
+                        tail.next = new Link();
+                        tail = tail.next;
+                        tail.element = current.element;
+                        tail.next = null;
+                    }
+                    start++;
+                    current = current.next;
+                }
+                return arr[pos] = newList;
+            }
+        }
+        return arr[pos];
+    }
+
+    /** Copies sequence at a position
+     ** returns head of new linked list copy */
+    public Link copyList(int pos1, Link[] arr){
+        if(DNAList.arrFilled[pos1].equals(DNAList.Status.EMPTY)){
+            System.out.println("No sequence to copy at specified position");
+        } else if(DNAList.arrFilled[pos1].equals(DNAList.Status.FILLED)){
+            Link current = arr[pos1];
+            Link newList = null;
+            Link tail = null;
+            while(current!= null) {
+                if (newList == null) {
+                    newList = new Link(current.getElement(), null);
+                    tail = newList;
+                } else {
+                    tail.next = new Link();
+                    tail = tail.next;
+                    tail.element = current.element;
+                    tail.next = null;
+                }
+                current = current.next;
+            }
+            return newList;
+        }
+        return null;
+    }
+
+
+    /** Transcribes sequence in required order
+     ** Only trascribes if the initial sequence is DNA*/
+    public Link transcribeList(int pos, Link[] arr){
+        if(checkIfDNA(arr[pos])){
+            Link head = arr[pos];
+            Link current = head;
+            if(head == null || head.next == null){
+                return head;
+            }
+            while(current != null){
+                if(current.element == 'A'){
+                    current.element = 'T';
+                } else if (current.element == 'T'){
+                    current.element = 'A';
+                } else if (current.element == 'C'){
+                    current.element = 'G';
+                } else if (current.element == 'G'){
+                    current.element = 'C';
+                }
+                current = current.next;
+            }
+
+            current = head;
+            for(int i = 0; i < size(arr, pos); i++){
+                if(current.element == 'T'){
+                    current.element = 'U';
+                }
+                current = current.next;
+            }
+
+        } else if(!checkIfDNA(arr[pos])){
+            System.out.println("Cannot Transcribe RNA");
+        }
+        return arr[pos];
+    }
+
+    /** reversing the list for transcription */
+    public Link reverseList(Link node){
+        Link current = node;
+        Link prev = null;
+        while(current != null){
+            Link nextTemp = current.next;
+            current.next = prev;
+            prev = current;
+            current = nextTemp;
+        }
+        return prev;
+    }
+
+    /** delete the list  */
+    public void deleteList(int index, Link[] arr){
+        arr[index].setElement('\0');
+        arr[index].setNext(null);
+        DNAList.arrFilled[index] = DNAList.Status.EMPTY;
+    }
+
+    /** return true if the sequence is RNA
+     ** else false based on the ACGU order for RNA*/
+    public static boolean checkIfRNA(Link head){
+        Link current = head;
+        while((current != null)){
+            if(current.getElement() == 'A'){
+                current = current.getNext();
+            } else if (current.getElement() == 'C'){
+                current = current.getNext();
+            } else if (current.getElement() == 'G'){
+                current = current.getNext();
+            } else if (current.getElement() == 'U'){
+                current = current.getNext();
+            } else {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    /** return true if the sequence is DNA
+     ** else false based on the ACTG order for DNA*/
+    public static boolean checkIfDNA(Link head){
+        Link current = head;
+        while(current != null){
+            if(current.getElement() == 'A'){
+                current = current.getNext();
+            } else if (current.getElement() == 'C'){
+                current = current.getNext();
+            } else if (current.getElement() == 'T'){
+                current = current.getNext();
+            } else if (current.getElement() == 'G'){
+                current = current.getNext();
+            } else {
+                return false;
+
+            }
+        }
+        return true;
+    }
+
+
 }
+
+
+
+
+
+
 
