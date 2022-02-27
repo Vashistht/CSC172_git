@@ -1,4 +1,4 @@
-# CSC172- Lab 4
+# CSC172- Lab 2
 Lab-Partners: Vashisth Tiwari, Livia Betti
 
 Vashisth Tiwari:
@@ -52,4 +52,4 @@ Tests Performed:
 
 (1) cd src
 (2) javac DNAList.java
-(3) java DNAList
+(3) java DNAList <arraysize> <commandfile>
