@@ -44,7 +44,7 @@ Tests Performed:
 		copy pos1 pos2
 		print
 
-	-command.txt (Professor Zhupa's input); returns desired output (except for error Professor Zhupa had in one line)
+	-command.txt (Professor Zhupa's input); returns desired output (except for error Professor Zhupa had in two lines)
 	-Lab4Test_Alex.txt; returns desires output
 
 
