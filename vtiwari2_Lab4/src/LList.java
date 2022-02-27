@@ -1,4 +1,5 @@
 /*
+partially based on professor Zhupa's code
 Source:
 reversing the linked list: https://www.geeksforgeeks.org/reverse-a-linked-list/
 */
@@ -113,15 +114,6 @@ public class LList implements List {
         return arr[index];
     }
 
-//    /** print elements in list (head to tail) */
-//    public void printList() {
-//        Link pos = head;
-//        while(pos!=null){
-//            System.out.print(pos.getElement()+" ");
-//            pos = pos.getNext();
-//        }
-//        System.out.println();
-//    }
 
     /** prints from the given node (temp)*/
     public static void printLinks(Link temp){

@@ -3,6 +3,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 
 public class DNAList {
+
     /** Enum for DNA or RNA */
     enum Type{
         DNA,
@@ -22,7 +23,7 @@ public class DNAList {
         LList lList = new LList();
         Array arr = new Array();
 
-        String number = args[0];
+        String number = args[0]; // should be 20
         String filename = args[1];
         arrLinks = new LList.Link[Integer.parseInt(number)];
         arrFilled = new Status[Integer.parseInt(number)];

@@ -36,7 +36,6 @@ public class Array {
                 DNAList.arrLinks[pos] = head;
             }
         }
-
     }
 
     /** Initializes with EMPTY enum */

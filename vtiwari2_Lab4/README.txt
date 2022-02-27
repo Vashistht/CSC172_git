@@ -53,3 +53,4 @@ Tests Performed:
 (1) cd src
 (2) javac DNAList.java
 (3) java DNAList <arraysize> <commandfile>
+(Arraysize = 20) 
