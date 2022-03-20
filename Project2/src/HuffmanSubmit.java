@@ -7,6 +7,9 @@ import java.util.HashMap;
 import java.io.FileWriter;
 import java.io.IOException;
 
+/** Node class to compare the two nodes and place them accordingly  where using priority queue
+ - frequencies to organize priority queue from lowest to highest **/
+
 class Node implements Comparable<Node>{
     char ch;
     Integer freq;
@@ -33,7 +36,7 @@ class Node implements Comparable<Node>{
             return 0;
     }
 
-    public boolean isLeaf() {
+    public boolean isLeaf() { // to check the end of the tree
         if ((this.left == null) && (this.right == null)) {
             return true;
         } else {
@@ -42,11 +45,11 @@ class Node implements Comparable<Node>{
     }
 }
 
-
+/** this class implements the Huffman interface given to us**/
 public class HuffmanSubmit implements Huffman {
     HashMap<Character, Integer> frequencies = new HashMap<Character, Integer>(); //Creates Hashmap of frequencies
-    HashMap<Character, String> huffmanCodesEnc = new HashMap<Character, String>(); //Creates Hashmap of Huffman Codes;
-    HashMap<String, Character> huffmanCodesDec = new HashMap<String, Character>(); //Creates Hashmap of Huffman Codes;
+    HashMap<Character, String> huffmanCodesEnc = new HashMap<Character, String>(); //Creates Hashmap of Huffman Codes enc;
+    HashMap<String, Character> huffmanCodesDec = new HashMap<String, Character>(); //Creates Hashmap of Huffman Codes dec;
     PriorityQueue<Node> huffmanTreePQ = new PriorityQueue<>();
     Node huffmanTree;
 
@@ -63,7 +66,8 @@ public class HuffmanSubmit implements Huffman {
         huffmanTree = huffmanTreePQ.poll();
     }
 
-    public void createFreqFile(String inputFile, String freqFile) throws FileNotFoundException { //Create frequency file
+    /**	FileWriter used to create the frequency file, writes on the file using BufferedWriter */
+    public void createFreqFile(String inputFile, String freqFile) throws FileNotFoundException {
         BinaryIn in  = new BinaryIn(inputFile);
 
         while (!in.isEmpty()){
@@ -76,6 +80,9 @@ public class HuffmanSubmit implements Huffman {
         }
 
         try {
+            // gets ASCII code of a given character and if the length of the code isn't 8
+            // just slaps on a 0 in the front
+
             FileWriter myWriter = new FileWriter(freqFile);
             for (Character i : frequencies.keySet()){
                 Integer val = Integer.valueOf(i);
@@ -89,26 +96,28 @@ public class HuffmanSubmit implements Huffman {
                 myWriter.write("\n");
             }
             myWriter.close();
-        } catch (IOException e) {
-            //
+        } catch (IOException e) { //added the warning
+            System.out.println("Frequency file could not be written.");
         }
 
     }
 
     public void createHuffmanTree(){
-        Node node1 = huffmanTreePQ.poll();
-        Node node2 = huffmanTreePQ.poll();
+        // small trees are merged till we generate root
+
+        Node node1 = huffmanTreePQ.poll(); // Oth elememt
+        Node node2 = huffmanTreePQ.poll(); //first element
 
         Node combinedNode = new Node(node1.freq + node2.freq, node1, node2);
-        huffmanTreePQ.add(combinedNode);
+        huffmanTreePQ.add(combinedNode); // adds the combined node to the priority queue
     }
 
-    public HashMap<Character, String> putCodesInHashEnc(Node node, String huffmanCode){
+    public HashMap<Character, String> putCodesInHashEnc(Node node, String huffmanCode){ //puts code into hash econder
         if (node == null){
             return huffmanCodesEnc;
         }
 
-        //Potential bug
+        //Potential bug: fixed
         if (node.isLeaf()){
             huffmanCodesEnc.put(node.ch, huffmanCode);
             //System.out.println("Huffman Code for " + node.binString + " is " + huffmanCode);
@@ -116,16 +125,15 @@ public class HuffmanSubmit implements Huffman {
             putCodesInHashEnc(node.left, huffmanCode.concat("0"));
             putCodesInHashEnc(node.right, huffmanCode.concat("1"));
         }
-
         return huffmanCodesEnc;
     }
 
-    public HashMap<String, Character> putCodesInHashDec(Node node, String huffmanCode){
+    public HashMap<String, Character> putCodesInHashDec(Node node, String huffmanCode){ //return decoded hascodes
         if (node == null){
             return huffmanCodesDec;
         }
 
-        //Potential bug
+        //Potential bug: fixed
         if (node.isLeaf()){
             huffmanCodesDec.put(huffmanCode, node.ch);
             //System.out.println("Huffman Code for " + node.binString + " is " + huffmanCode);
@@ -137,7 +145,7 @@ public class HuffmanSubmit implements Huffman {
         return huffmanCodesDec;
     }
 
-    public void buildFreq(String freqFile) throws FileNotFoundException{
+    public void buildFreq(String freqFile) throws FileNotFoundException{ // create the frequency file
         File myFreqFile = new File(freqFile);
         Scanner scnr = new Scanner(myFreqFile);
 
@@ -154,7 +162,8 @@ public class HuffmanSubmit implements Huffman {
         }
     }
 
-    public void createHuffmanEnc(){
+
+    public void createHuffmanEnc(){ // take the frequency of a character and add to the priority queue
         for (Character i : frequencies.keySet()){
             Node charFreq = new Node(i, frequencies.get(i));
             huffmanTreePQ.add(charFreq);
@@ -180,9 +189,9 @@ public class HuffmanSubmit implements Huffman {
         putCodesInHashDec(huffmanTree, "");
     }
 
+    // gets the huffman code for character c, pads false if huffmancode at index i is 0 and true if it is 1
     public void createOutputEnc(String inputFile, String outputFile) throws FileNotFoundException{
         BinaryIn in = new BinaryIn(inputFile);
-
         BinaryOut out = new BinaryOut(outputFile);
         while (!in.isEmpty()){
             char c = in.readChar();
@@ -195,7 +204,7 @@ public class HuffmanSubmit implements Huffman {
                 }
             }
         }
-        out.flush();
+        out.flush(); //flushes after the output stream is done
     }
 
     public char traverseTree(BinaryIn in, Node node){
@@ -237,7 +246,6 @@ public class HuffmanSubmit implements Huffman {
 
         resetFreq();
         resetHuffmanCodes();
-
     }
 
 
@@ -258,13 +266,12 @@ public class HuffmanSubmit implements Huffman {
     }
 
 
-
-
-
     public static void main(String[] args) {
         Huffman  huffman = new HuffmanSubmit();
         huffman.encode("ur.jpg", "ur.enc", "freq.txt");
         huffman.decode("ur.enc", "ur_dec.jpg", "freq.txt");
+//        huffman.encode("alice30.txt", "alice30.enc", "freqalice.txt");
+//        huffman.decode("alice30.enc", "freqalice_dec.jpg", "freqalice.txt");
         // After decoding, both ur.jpg and ur_dec.jpg should be the same.
         // On linux and mac, you can use `diff' command to check if they are the same.
         //System.out.println("hi");
