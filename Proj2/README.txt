@@ -88,7 +88,7 @@ Test results in the tests folder with screenshots
 (1) tested the image ur.jpg - same output as expected
 (2) tested the frequency of letter a in alice.txt using a script
 
-## Extra credit:
+## Extra credit: two frame animation for the tree. The tree was drawn for this screen so might not scale accordingly
 - run the HuffmanGraphics File
 (1) cd src
 (2) javac HuffmanGraphics.java
