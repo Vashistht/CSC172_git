@@ -5,7 +5,6 @@ import java.util.Scanner;
 
 import javax.swing.JComponent;
 import javax.swing.JFrame;
-
 import java.awt.Color;
 import java.awt.Graphics;
 import javax.swing.Timer;
@@ -21,12 +20,15 @@ import java.awt.event.ActionListener;
 import java.util.HashMap;
 import java.io.FileWriter; 
 import java.io.IOException;
+import java.util.TimerTask;
+import java.util.concurrent.TimeUnit;
 
 class Node implements Comparable<Node>{
 	char ch;
 	Integer freq;
 	Node left = null;
 	Node right = null;
+	private Timer timer;
 
 	Node(char ch, Integer freq){ //Constructor
 		this.ch = ch;
@@ -68,32 +70,82 @@ public class HuffmanGraphics extends JComponent implements Huffman {
 
     @Override
 	public void paintComponent(Graphics g) {
-        paintHuffmanTree(g, huffmanTree, 500, 20);
+        paintHuffmanTree(g, huffmanTree, 600, 20);
     }
 
 	public void paintHuffmanTree(Graphics g, Node node, int x, int y){
 		Graphics2D g2D = (Graphics2D) g;
-
+		int delay = 2;
+//		Timer timer = new Timer();
+//		timer.schedule(new TimerTask() {}
+//		ActionListener taskPerformer = new ActionListener() {
+//			@Override
+//			public void actionPerformed(ActionEvent e) {
+//				// what the is do be done if.. else
+//				if (node.isLeaf()){
+//					g2D.setColor(Color.GRAY);
+//					Rectangle rect = new Rectangle(x, y, 50, 20);
+//					g2D.fill(rect);
+//					String nodeText = node.ch + ": " + node.freq;
+//					g2D.setColor(Color.BLACK);
+//					g2D.drawString(nodeText, x, y + 10);
+//
+//				} else {
+//					g2D.setColor(Color.GRAY);
+//					Rectangle rect = new Rectangle(x, y, 50, 20);
+//					g2D.fill(rect);
+//					String nodeText = Integer.toString(node.freq);
+//					g2D.setColor(Color.BLACK);
+//					g2D.drawString(nodeText, x, y+10);
+//					g2D.drawLine(x+25, y+20, x - 50, y + 30);
+//					g2D.drawString("0", x - 15, y+25);
+//					g2D.drawLine(x+25, y+20, x + 75, y + 30);
+//					g2D.drawString("1", x + 55, y+25);
+//					paintHuffmanTree(g, node.left, x - 75, y + 30);
+//					paintHuffmanTree(g, node.right, x + 50, y + 30);
+//				}
+//			}
+//		};
+//		new Timer(delay, taskPerformer).start();
 		if (node.isLeaf()){
-			g2D.setColor(Color.GRAY);
-			Rectangle rect = new Rectangle(x, y, 50, 20);
-			g2D.fill(rect);
-			String nodeText = node.ch + ": " + node.freq;
-			g2D.setColor(Color.BLACK);
-			g2D.drawString(nodeText, x, y + 10);
+		g2D.setColor(Color.GRAY);
+		Rectangle rect = new Rectangle(x, y, 50, 20);
+		g2D.fill(rect);
+		String nodeText = node.ch + ": " + node.freq;
+		g2D.setColor(Color.BLACK);
+		g2D.drawString(nodeText, x, y + 10);
 		} else {
-			g2D.setColor(Color.GRAY);
-			Rectangle rect = new Rectangle(x, y, 50, 20);
-			g2D.fill(rect);
-			String nodeText = Integer.toString(node.freq);
-			g2D.setColor(Color.BLACK);
-			g2D.drawString(nodeText, x, y+10);
-			g2D.drawLine(x+25, y+20, x - 50, y + 30);
-			g2D.drawString("0", x - 15, y+25);
-			g2D.drawLine(x+25, y+20, x + 75, y + 30);
-			g2D.drawString("1", x + 55, y+25);
-			paintHuffmanTree(g, node.left, x - 75, y + 30);
-			paintHuffmanTree(g, node.right, x + 50, y + 30);
+		g2D.setColor(Color.GRAY);
+		Rectangle rect = new Rectangle(x, y, 50, 20);
+		g2D.fill(rect);
+		String nodeText = Integer.toString(node.freq);
+		g2D.setColor(Color.BLACK);
+		g2D.drawString(nodeText, x, y + 10);
+
+		try {
+			TimeUnit.SECONDS.sleep((long) .99);
+		} catch(InterruptedException e){
+			e.printStackTrace();
+		}
+
+		g2D.drawLine(x + 25, y + 20, x - 50, y + 30);
+
+		try {
+			TimeUnit.SECONDS.sleep((long) .99);
+		} catch(InterruptedException e){
+			e.printStackTrace();
+		}
+
+		g2D.drawString("0", x - 15, y + 25);
+		g2D.drawLine(x + 25, y + 20, x + 75, y + 30);
+		g2D.drawString("1", x + 55, y + 25);
+		try {
+			TimeUnit.SECONDS.sleep((long) .99);
+		} catch(InterruptedException e){
+			e.printStackTrace();
+		}
+		paintHuffmanTree(g, node.left, x - 75, y + 30);
+		paintHuffmanTree(g, node.right, x + 50, y + 30);
 		}
 	}
 
@@ -325,15 +377,11 @@ public class HuffmanGraphics extends JComponent implements Huffman {
 	}
 	*/
 
-
-
-
-
    public static void main(String[] args) {
     HuffmanGraphics  huffman = new HuffmanGraphics();
 	huffman.encode("alice30.txt", "ur.enc", "freq.txt");
-	JFrame frame = new JFrame("Drone Pilot");
-	frame.add(huffman);
+	JFrame frame = new JFrame("Huffman Tree");
+    frame.add(huffman);
 	frame.setSize(1200,650);
 	frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	frame.setVisible(true);
