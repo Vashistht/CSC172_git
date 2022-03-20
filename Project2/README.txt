@@ -73,7 +73,7 @@ A program that allows the user to compress and decompress files using the  Huffm
 
 ## Running the code
 (1) cd src
-(2) javac *.java
+(2) javac HuffmanSubmit.java
 (3) java HuffmanSubmit
 
 ## Tests
@@ -82,5 +82,7 @@ Test results in the tests folder with screenshots
 (2) tested the frequency of letter a in alice.txt using a script
 
 ## Extra credit:
-- partial implementation in the extra credit folder
-- bugs in the code and does not function completely as desired
+- run the HuffmanGraphics File
+(1) cd src
+(2) javac HuffmanGraphics.java
+(3) java HuffmanGraphics 
