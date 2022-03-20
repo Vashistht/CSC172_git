@@ -123,7 +123,7 @@ public class HuffmanGraphics extends JComponent implements Huffman {
 		g2D.drawString(nodeText, x, y + 10);
 
 		try {
-			TimeUnit.SECONDS.sleep((long) .99);
+			TimeUnit.SECONDS.sleep((long) .999);
 		} catch(InterruptedException e){
 			e.printStackTrace();
 		}
@@ -131,7 +131,7 @@ public class HuffmanGraphics extends JComponent implements Huffman {
 		g2D.drawLine(x + 25, y + 20, x - 50, y + 30);
 
 		try {
-			TimeUnit.SECONDS.sleep((long) .99);
+			TimeUnit.SECONDS.sleep((long) .999);
 		} catch(InterruptedException e){
 			e.printStackTrace();
 		}
@@ -140,7 +140,7 @@ public class HuffmanGraphics extends JComponent implements Huffman {
 		g2D.drawLine(x + 25, y + 20, x + 75, y + 30);
 		g2D.drawString("1", x + 55, y + 25);
 		try {
-			TimeUnit.SECONDS.sleep((long) .99);
+			TimeUnit.SECONDS.sleep((long) .999);
 		} catch(InterruptedException e){
 			e.printStackTrace();
 		}
