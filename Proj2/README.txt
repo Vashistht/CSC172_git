@@ -13,6 +13,7 @@ Net ID: lbetti
 
 ## Description of the code (HuffmanSubmit)
 A program that allows the user to compress and decompress files using the  Huffman algorithm for encoding and decoding.
+
     - Node class
         - implements a node with character and corresponding frequency
         - Compareto: input node n, returns -1, 0, and 1 according to how the frequencies compare.
@@ -70,6 +71,12 @@ A program that allows the user to compress and decompress files using the  Huffm
         - input: Name of inputFile, output file, and for the frequency file
         - using the frequency file return the hashmap for the huffman tree using the putCodesInHashDec method
         - creates the output file using the createOutputDec method with the name provided by the user
+
+    - main: calls the encode and the decode methods
+        For each of the separate files you want to encode and decode you will have to change the names in the main method accordingly.
+        -  huffman.encode( add the name of the file you want to compress, the name of the encoded output, name of frequency file)
+        -  huffman.decode( the name of the encoded output, name of the file created after decoding, name of frequency file)
+
 
 ## Running the code
 (1) cd src

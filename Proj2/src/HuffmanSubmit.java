@@ -268,7 +268,7 @@ public class HuffmanSubmit implements Huffman {
 
     public static void main(String[] args) {
         Huffman  huffman = new HuffmanSubmit();
-        huffman.encode("ur.jpg", "ur.enc", "freq.txt");
+        huffman.encode("ur.jpg", "ur.enc", "freq.txt"); //chante file name accordingly
         huffman.decode("ur.enc", "ur_dec.jpg", "freq.txt");
 //        huffman.encode("alice30.txt", "alice30.enc", "freqalice.txt");
 //        huffman.decode("alice30.enc", "freqalice_dec.jpg", "freqalice.txt");

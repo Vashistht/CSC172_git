@@ -20,8 +20,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import java.util.HashMap;
-import java.io.FileWriter; 
+import java.io.FileWriter;
 import java.io.IOException;
+import java.util.concurrent.TimeUnit;
 
 class Node implements Comparable<Node>{
 	char ch;
@@ -46,11 +47,11 @@ class Node implements Comparable<Node>{
 
 	public int compareTo(Node n){ //Compare frequencies to organize priority queue from lowest to highest
 		if(this.freq < n.freq){ //If frequency of node is higher, we consider this node "less" in comparison
-            return -1;
-        } else if (this.freq > n.freq){ //If frequency of node is lower, we consider this node "greater" in comparison
-            return 1;
-        } else
-            return 0;
+			return -1;
+		} else if (this.freq > n.freq){ //If frequency of node is lower, we consider this node "greater" in comparison
+			return 1;
+		} else
+			return 0;
 	}
 
 	public boolean isLeaf() {
@@ -65,16 +66,16 @@ class Node implements Comparable<Node>{
 
 public class HuffmanGraphics extends JComponent implements Huffman {
 	HashMap<Character, Integer> frequencies = new HashMap<Character, Integer>(); //Creates Hashmap of frequencies
-	HashMap<Character, String> huffmanCodesEnc = new HashMap<Character, String>(); //Creates Hashmap of Huffman Codes; 
-	HashMap<String, Character> huffmanCodesDec = new HashMap<String, Character>(); //Creates Hashmap of Huffman Codes; 
+	HashMap<Character, String> huffmanCodesEnc = new HashMap<Character, String>(); //Creates Hashmap of Huffman Codes;
+	HashMap<String, Character> huffmanCodesDec = new HashMap<String, Character>(); //Creates Hashmap of Huffman Codes;
 	PriorityQueue<Node> huffmanTreePQ = new PriorityQueue<>();
 	Node huffmanTree;
-    boolean painted = false;
+	boolean painted = false;
 
-    @Override
+	@Override
 	public void paintComponent(Graphics g) {
-        paintHuffmanTree(g, huffmanTree, 600, 20, 600);
-    }
+		paintHuffmanTree(g, huffmanTree, 600, 20, 600);
+	}
 
 	public void paintHuffmanTree(Graphics g, Node node, int x, int y, int width){
 		Graphics2D g2D = (Graphics2D) g;
@@ -101,10 +102,27 @@ public class HuffmanGraphics extends JComponent implements Huffman {
 			g2D.drawString(nodeText, x, y+10);
 			g2D.drawLine(x+25, y + 20, x - (int) (width/(1.2)) + 20, y + 30);
 			g2D.drawString("0", x + (25 - (width)/5 + 20)/2, y+25);
+
+
+			try {
+				TimeUnit.SECONDS.sleep((long) .999);
+			} catch(InterruptedException e){
+				e.printStackTrace();
+			}
+
+
 			paintHuffmanTree(g, node.left, x - (int) (width/(1.2)), y + 30, (int) (width/(1.2)));
 
 			g2D.drawLine(x+25, y+20, x + (int) (width/(1.2)) + 20, y + 55);
 			g2D.drawString("1", x + (25 + (int) (width/(1.2)))/2, y+50);
+
+
+			try {
+				TimeUnit.SECONDS.sleep((long) .999);
+			} catch(InterruptedException e){
+				e.printStackTrace();
+			}
+
 			paintHuffmanTree(g, node.right, x + (int) (width/(1.2)), y + 55, (int) (width/(1.2)));
 		}
 	}
@@ -121,7 +139,7 @@ public class HuffmanGraphics extends JComponent implements Huffman {
 	public void setHuffmanTree(){
 		huffmanTree = huffmanTreePQ.poll();
 	}
-  
+
 	public void createFreqFile(String inputFile, String freqFile) throws FileNotFoundException { //Create frequency file
 		BinaryIn in  = new BinaryIn(inputFile);
 
@@ -168,7 +186,7 @@ public class HuffmanGraphics extends JComponent implements Huffman {
 		}
 
 		//Potential bug
-		if (node.isLeaf()){ 
+		if (node.isLeaf()){
 			huffmanCodesEnc.put(node.ch, huffmanCode);
 			//System.out.println("Huffman Code for " + node.binString + " is " + huffmanCode);
 		} else {
@@ -185,7 +203,7 @@ public class HuffmanGraphics extends JComponent implements Huffman {
 		}
 
 		//Potential bug
-		if (node.isLeaf()){ 
+		if (node.isLeaf()){
 			huffmanCodesDec.put(huffmanCode, node.ch);
 			//System.out.println("Huffman Code for " + node.binString + " is " + huffmanCode);
 		} else {
@@ -199,7 +217,7 @@ public class HuffmanGraphics extends JComponent implements Huffman {
 	public void buildFreq(String freqFile) throws FileNotFoundException{
 		File myFreqFile = new File(freqFile);
 		Scanner scnr = new Scanner(myFreqFile);
-		
+
 		while (scnr.hasNextLine()){
 			String scnrLine = scnr.nextLine();
 			int indOfColon = scnrLine.indexOf(":");
@@ -261,7 +279,7 @@ public class HuffmanGraphics extends JComponent implements Huffman {
 			char c = node.ch;
 			return c;
 		}
-		
+
 		if (in.readBoolean() == false){
 			return traverseTree(in, node.left);
 		} else {
@@ -284,7 +302,7 @@ public class HuffmanGraphics extends JComponent implements Huffman {
 		} catch (FileNotFoundException e) {
 			//e.printStackTrace();
 		}
-	
+
 		createHuffmanEnc();
 
 		try {
@@ -295,11 +313,11 @@ public class HuffmanGraphics extends JComponent implements Huffman {
 
 		resetFreq();
 		resetHuffmanCodes();
-		
-   }
 
-   
-   public void decode(String inputFile, String outputFile, String freqFile){
+	}
+
+
+	public void decode(String inputFile, String outputFile, String freqFile){
 		try {
 			buildFreq(freqFile);
 		} catch (FileNotFoundException e) {
@@ -316,23 +334,23 @@ public class HuffmanGraphics extends JComponent implements Huffman {
 
 		resetFreq();
 		resetHuffmanCodes();
-   }
+	}
 
    /*
    protected Timer timer;
-	
+
 	public HuffmanGraphics() {
 		super();
 		setFocusable(true);
 		timer = new Timer(10, new TimerCallback());
 		timer.start();
 	}
-	
+
 	protected class TimerCallback implements ActionListener {
-			
+
 		public void actionPerformed(ActionEvent e) {
             painted = true;
-			repaint();		
+			repaint();
 		}
 	}
 	*/
@@ -341,17 +359,19 @@ public class HuffmanGraphics extends JComponent implements Huffman {
 
 
 
-   public static void main(String[] args) {
-    HuffmanGraphics  huffman = new HuffmanGraphics();
-	huffman.encode("alice30.txt", "ur.enc", "freq.txt");
-	JFrame frame = new JFrame("Huffman Tree");
-	frame.add(huffman);
-	frame.setSize(1500,650);
-	frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-	frame.setVisible(true);
-	//huffman.decode("ur.enc", "myText.txt", "freq.txt");
-	// After decoding, both ur.jpg and ur_dec.jpg should be the same. 
-	// On linux and mac, you can use `diff' command to check if they are the same. 
-   }
+	public static void main(String[] args) {
+		HuffmanGraphics  huffman = new HuffmanGraphics();
+		huffman.encode("alice30.txt", "ur.enc", "freq.txt");
+		JFrame frame = new JFrame("Huffman Tree");
+		frame.add(huffman);
+		frame.setSize(1500,650);
+//		frame.setPreferredSize(new Dimension(1500, 650));
+
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setVisible(true);
+		//huffman.decode("ur.enc", "myText.txt", "freq.txt");
+		// After decoding, both ur.jpg and ur_dec.jpg should be the same.
+		// On linux and mac, you can use `diff' command to check if they are the same.
+	}
 
 }
