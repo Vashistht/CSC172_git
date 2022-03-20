@@ -98,27 +98,14 @@ public class HuffmanGraphics extends JComponent implements Huffman {
 			//System.out.println(nodeText + " is internal with x = " + x + ", y = " + y);
 			//System.out.println("Line starts at x = " + (x-25) + "y = " + (y-20));
 
-			if ((node.left).isLeaf()){
-				g2D.drawString(nodeText, x, y+10);
-				g2D.drawLine(x+25, y + 20, x, y + 30);
-				g2D.drawString("0", x +5, y+25);
-				paintHuffmanTree(g, node.left, x - 20, y + 30, width/2);
-			} else {
-				g2D.drawString(nodeText, x, y+10);
-				g2D.drawLine(x+25, y + 20, x - (width/2) + 20, y + 30);
-				g2D.drawString("0", x + (25 - (width)/2 + 20)/2, y+25);
-				paintHuffmanTree(g, node.left, x - width/2, y + 30, width/2);
-			}
+			g2D.drawString(nodeText, x, y+10);
+			g2D.drawLine(x+25, y + 20, x - (int) (width/(1.2)) + 20, y + 30);
+			g2D.drawString("0", x + (25 - (width)/5 + 20)/2, y+25);
+			paintHuffmanTree(g, node.left, x - (int) (width/(1.2)), y + 30, (int) (width/(1.2)));
 
-			if ((node.right).isLeaf()){
-				g2D.drawLine(x+25, y+20, x + 40, y + 55);
-				g2D.drawString("1", x + 40, y+50);
-				paintHuffmanTree(g, node.right, x + 20, y + 55, width/2);
-			} else{
-				g2D.drawLine(x+25, y+20, x + (width/2) + 20, y + 55);
-				g2D.drawString("1", x + (55 + (width)/2)/2, y+50);
-				paintHuffmanTree(g, node.right, x + width/2, y + 55, width/2);
-			}
+			g2D.drawLine(x+25, y+20, x + (int) (width/(1.2)) + 20, y + 55);
+			g2D.drawString("1", x + (25 + (int) (width/(1.2)))/2, y+50);
+			paintHuffmanTree(g, node.right, x + (int) (width/(1.2)), y + 55, (int) (width/(1.2)));
 		}
 	}
 
