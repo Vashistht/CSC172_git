@@ -12,7 +12,7 @@ import javax.swing.Timer;
 
 import java.awt.Graphics2D;
 import java.awt.geom.Ellipse2D;
-import java.awt.geom.Rectangle2D;
+import java.awt.Rectangle;
 import java.awt.geom.RoundRectangle2D;
 
 import java.awt.event.ActionEvent;
@@ -68,16 +68,34 @@ public class HuffmanGraphics extends JComponent implements Huffman {
 
     @Override
 	public void paintComponent(Graphics g) {
-        Graphics2D g2D = (Graphics2D) g;
-        RoundRectangle2D nodeG;
-		g2D.setColor(Color.BLACK);
-        for (int i = 0; i < huffmanTreePQ.size(); i++){
-            nodeG = new RoundRectangle2D.Double(100*(i+1), 400, 100, 100, 10, 10);
-			g2D.fill(nodeG);
-        }
-		//g2D.drawLine(0, 0, 100, 100);
-        painted = false;
+        paintHuffmanTree(g, huffmanTree, 500, 20);
     }
+
+	public void paintHuffmanTree(Graphics g, Node node, int x, int y){
+		Graphics2D g2D = (Graphics2D) g;
+
+		if (node.isLeaf()){
+			g2D.setColor(Color.GRAY);
+			Rectangle rect = new Rectangle(x, y, 50, 20);
+			g2D.fill(rect);
+			String nodeText = node.ch + ": " + node.freq;
+			g2D.setColor(Color.BLACK);
+			g2D.drawString(nodeText, x, y + 10);
+		} else {
+			g2D.setColor(Color.GRAY);
+			Rectangle rect = new Rectangle(x, y, 50, 20);
+			g2D.fill(rect);
+			String nodeText = Integer.toString(node.freq);
+			g2D.setColor(Color.BLACK);
+			g2D.drawString(nodeText, x, y+10);
+			g2D.drawLine(x+25, y+20, x - 50, y + 30);
+			g2D.drawString("0", x - 15, y+25);
+			g2D.drawLine(x+25, y+20, x + 75, y + 30);
+			g2D.drawString("1", x + 55, y+25);
+			paintHuffmanTree(g, node.left, x - 75, y + 30);
+			paintHuffmanTree(g, node.right, x + 50, y + 30);
+		}
+	}
 
 	public void resetFreq(){
 		frequencies.clear();
@@ -288,6 +306,7 @@ public class HuffmanGraphics extends JComponent implements Huffman {
 		resetHuffmanCodes();
    }
 
+   /*
    protected Timer timer;
 	
 	public HuffmanGraphics() {
@@ -304,21 +323,20 @@ public class HuffmanGraphics extends JComponent implements Huffman {
 			repaint();		
 		}
 	}
+	*/
 
 
 
 
 
    public static void main(String[] args) {
-    Huffman  huffman = new HuffmanGraphics();
-    JFrame frame = new JFrame("Drone Pilot");
+    HuffmanGraphics  huffman = new HuffmanGraphics();
 	huffman.encode("alice30.txt", "ur.enc", "freq.txt");
-		HuffmanGraphics game1 = new HuffmanGraphics();
-		game1.encode("alice30.txt", "ur.enc", "freq.txt");
-		frame.add(game1);
-		frame.setSize(1200,650);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.setVisible(true);
+	JFrame frame = new JFrame("Drone Pilot");
+	frame.add(huffman);
+	frame.setSize(1200,650);
+	frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	frame.setVisible(true);
 	//huffman.decode("ur.enc", "myText.txt", "freq.txt");
 	// After decoding, both ur.jpg and ur_dec.jpg should be the same. 
 	// On linux and mac, you can use `diff' command to check if they are the same. 
