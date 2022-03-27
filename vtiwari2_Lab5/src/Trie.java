@@ -1,20 +1,21 @@
-public class Trie <Key, E> {
+public class Trie<Key, E> {
     public static int key;
     public String element;
     public static  Trie<Integer, String> node;
-    public <Key, String> left;
-    public <Key, String> right;
+    public Trie<Key, String> left;
+    public Trie<Key, String> right;
 
     /** constructors for the Trie class*/
     // constructor 1
-    public Trie(int n, String val) {
-        key = n;
-        element = val;
+    public Trie() {
         left = right = null;
     }
 
     // constructor 2
-    public Trie() {
+    
+    public Trie(int n, String val) {
+        key = n;
+        element = val;
         left = right = null;
     }
 
@@ -23,13 +24,13 @@ public class Trie <Key, E> {
         key = n;
         element = val;
         left = l;
-        right = r
+        right = r;
     }
 
     /** getters and setters */
     //for element
     public String element(){
-        return element
+        return element;
     }
     public void setElement(String e){
          element = e;
@@ -37,7 +38,7 @@ public class Trie <Key, E> {
 
     //for key n
     public String key(){
-        return key
+        return key;
     }
     public void setKey(int n){
         key = n;
@@ -45,24 +46,24 @@ public class Trie <Key, E> {
 
     // for left child
     public Trie<Key, String> left(){
-        return left
+        return left;
     }
-    public void setLeft(Trie<Key, String> l){
-        left = l;
+    public void setLeft(Trie<Key, String> s){
+        left = s;
     }
 
     // for right child
     public Trie<Key, String> right(){
-        return right
+        return right;
     }
-    public void setRight(Trie<Key, String> r){
-        right = r;
+    public void setRight(Trie<Key, String> s){
+        right = s;
     }
 
     /** Know that data will be stored in a leaf of the trie.
      method to check if its a leaf **/
     public boolean isLeaf() {
-        left = null && right = null;
+        return (left == null) && (right == null);
     }
 
 
@@ -71,36 +72,36 @@ public class Trie <Key, E> {
      true or false indicating whether or not the insertion is successful.
      */
     // lets first make the function that does the insertion work
-    public Trie<Integer, String> insertString(Trie<Integer, String> root, String in, int k){
-        for (int i = 0; i < in.length(); i++){
-        if (root == null){
-            Trie<Integer, String> newNode = new Trie<>(k, st);
-            root = newNode;
-            System.out.println("2 new nodes");
-            return root
-        } else if (in.compareTo(root.element) !=0){
-            if (str.charAt(i) == '0'){
-                root.left = insertString(root.left(), input, k);
-                System.out.println("test left");
+    public Trie<Integer, String> insertString(Trie<Integer, String> root, String input, int k) {
+        for (int i = 0; i < input.length(); i++) {
+            if (root == null) {
+                Trie<Integer, String> newNode = new Trie<>(k, input);
+                root = newNode;
+                System.out.println("2 new nodes");
+                return root;
+            } else if (input.compareTo(root.element) != 0) {
+                if (input.charAt(i) == '0') {
+                    root.left = insertString(root.left(), input, k);
+                    System.out.println("test left");
+                } else {  //(input.charAt(i) == '1')
+                    root.right = insertString(root.right(), input, k);
+                    System.out.println("test right");
+                }
+                return root;
             }
-            else {  //(str.charAt(i) == '1')
-                root.right = insertString(root.right(), input, k);
-                System.out.println("test right");
-            }
-            return root
         }
+        return root;
+    }
 
     // should work
     public boolean insert(String st) {
         boolean insertBoolean = false;
-        // should I do Trie <Integer, String>
-        Trie rt;
+
         for (int i = 0; i < st.length(); i++){
             // if not 0, 1 then not valid
             if (st.charAt(i)!= '0' && st.charAt(i)!='1'){
                 System.out.println("Not valid input");
-//                insertBoolean = false
-                return insertBoolean;
+                return insertBoolean;       //insertBoolean = false
             }
             else{
                 insertBoolean = true;
@@ -111,8 +112,7 @@ public class Trie <Key, E> {
         }
         key++; // increment the key by 1
         System.out.println("1 inserted");
-        return insertBoolean
-    }
+        return insertBoolean;
     }
 
 
