@@ -122,6 +122,29 @@ public class Trie<Key, E> {
      2 * trieToList( trie ) creates a list of strings in trie in increasing lexicographic
      order. You are not allowed to use any kind of sort methods to sort the list.
      */
+    public void trieToList(Trie<Integer, String> node){
+        if (node == null) {return; }
+        //left side recursion
+        trieToList(node.left());
+        // the node itself
+        System.out.println(node.key() + " " + node.element());
+        //right side recursion
+        trieToList(node.right());
+
+        /*
+        - Since we know its a bst, left <0, right >= 0 for (node-element)
+        // code
+        String leftElement = node.left().element()
+        String rightElement = node.right().element()
+        if (node.element().compareTo(leftElement) >0){
+            System.out.println(node.element());
+            // recurse on the left side
+        }else if (node.element().compareTo(leftElement) >=0){
+            System.out.println(right.element());
+            // recurse on the right side
+        }
+        */
+    }
 
     /**
      3 * largest( trie ) returns the largest string in lexicographic order from the set of
