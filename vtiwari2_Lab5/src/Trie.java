@@ -1,7 +1,7 @@
 public class Trie <Key, E> {
     public static int key;
     public String element;
-    public static  <Integer, String> node;
+    public static  Trie<Integer, String> node;
     public <Key, String> left;
     public <Key, String> right;
 
@@ -70,10 +70,32 @@ public class Trie <Key, E> {
      1 * insert( trie, st ) inserts a string st into a non-empty trie trie. Returns either
      true or false indicating whether or not the insertion is successful.
      */
-    // not finished need to actually insert the string
+    // lets first make the function that does the insertion work
+    public Trie<Integer, String> insertString(Trie<Integer, String> root, String in, int k){
+        for (int i = 0; i < in.length(); i++){
+        if (root == null){
+            Trie<Integer, String> newNode = new Trie<>(k, st);
+            root = newNode;
+            System.out.println("2 new nodes");
+            return root
+        } else if (in.compareTo(root.element) !=0){
+            if (str.charAt(i) == '0'){
+                root.left = insertString(root.left(), input, k);
+                System.out.println("test left");
+            }
+            else {  //(str.charAt(i) == '1')
+                root.right = insertString(root.right(), input, k);
+                System.out.println("test right");
+            }
+            return root
+        }
+
+    // should work
     public boolean insert(String st) {
         boolean insertBoolean = false;
-        for (int i = 0; i = st.length()-1; i++){
+        // should I do Trie <Integer, String>
+        Trie rt;
+        for (int i = 0; i < st.length(); i++){
             // if not 0, 1 then not valid
             if (st.charAt(i)!= '0' && st.charAt(i)!='1'){
                 System.out.println("Not valid input");
@@ -84,9 +106,13 @@ public class Trie <Key, E> {
                 insertBoolean = true;
             }
         }
-        
-
-
+        if (insertBoolean){
+            insertString(node, st, key+1);
+        }
+        key++; // increment the key by 1
+        System.out.println("1 inserted");
+        return insertBoolean
+    }
     }
 
 
@@ -120,5 +146,4 @@ public class Trie <Key, E> {
     /**
      7 * height( trie ) returns the height of the trie.
      */
-    insert( trie, st )
 }
