@@ -1,0 +1,16 @@
+public AList<String> trieToList(Trie trie, AList<String> a){
+        if (trie == null){
+        } else if (trie.isLeaf()){
+            a.append(trie.element());
+        } else {
+            trieToList(trie.left);
+            trieToList(trie.right);
+        }
+        return a;
+    }
+
+    public AList<String> trieToList(Trie trie){
+        AList<String> trieArray = new AList();
+        trieToList(trie, trieArray);
+        return trieArray;
+    }
