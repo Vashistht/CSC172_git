@@ -160,8 +160,18 @@ public class Trie<Key, E> {
     /**
      5 * search( trie, st ) returns the string in trie that has the longest (and closest)
      prefix match with st as described in Section 1.2. You may assume that trie is not
-     */
+     */ 
+    // NOT DONE AT ALL RIP
+    // all u need is the actual root (or what I called node stupidly) you dont need the Trie thing but they want it so I added it 
+    public String search(Trie<Integer, String> node, String input){
+        String result;
+        Trie<Integer, String>pointer = node;
+        int currentHeigth, oldMatch = 0;
+        for (currentHeigth = 0; currentHeigth< input.length();currentHeigth++ ){
+        }
+        return result; 
 
+    }
     /**
      6 * size( trie ) returns the number of strings stored in the trie.
      */
