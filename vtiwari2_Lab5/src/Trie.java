@@ -1,4 +1,3 @@
-// some motivation from the 
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -6,11 +5,11 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Trie {
-	
+
 	static class Node {
-		String element;
 		Node left;
 		Node right;
+		String element;
 
 		public Node() { 
 			left = right = null;
@@ -18,7 +17,7 @@ public class Trie {
 		}
 
 		public boolean isLeaf() {
-			return left == null && right == null;
+			return (left == null && right == null);
 		}
 		
 		public Node(String element) {
@@ -39,12 +38,11 @@ public class Trie {
     */
 
 	public static boolean insert(Trie trie, String str) {
-		boolean insertBoolean = insert(trie.root, str, 0);
-		return insertBoolean;
+		return insertRecurse(trie.root, str, 0); // returns a bool depending on true or false from insertRecurse method define
 	}
 
 	// (initially this was insertRecurse feel free to rename to insert I had it so I can debug 
-	private static boolean insert(Node node, String str, int i) {
+	private static boolean insertRecurse(Node node, String str, int i) {
 
 		// Case 1: when empty (leaf and with element null) just add it 
 		if (node.element == null && node.isLeaf()) {
@@ -71,20 +69,20 @@ public class Trie {
 				// add string recursively
 				if (str.charAt(i) == '0') {
 					if (node.left == null) node.left = new Node();
-					return insert(node.left, str, i + 1); // call recursive function with new depth being i + 1
+					return insertRecurse(node.left, str, i + 1); // call recursive function with new depth being i + 1
 				} else {
 					if (node.right == null) node.right = new Node();
-					return insert(node.right, str, i + 1);
+					return insertRecurse(node.right, str, i + 1);
 				}
 			}
 		} else {
 			// not leaf node
 			if (str.charAt(i) == '0') {
 				if (node.left == null) node.left = new Node();
-				return insert(node.left, str, i + 1); 
+				return insertRecurse(node.left, str, i + 1); 
 			} else {
 				if (node.right == null) node.right = new Node();
-				return insert(node.right, str, i + 1);
+				return insertRecurse(node.right, str, i + 1);
 			}
 		}
 	}
@@ -94,8 +92,8 @@ public class Trie {
      order. You are not allowed to use any kind of sort methods to sort the list.
     */
 
-	// Livia's function: changed Alist to ArrayList, append to add
-	// modified so it fits with the nodal structure
+	// Liv's function: changed Alist to ArrayList, append to add
+	// modified so it fits with the node class
 	private static void trieToList(Node node, ArrayList<String> a) {
 		if (node == null) {
 		}else if (node.isLeaf()) {
@@ -140,33 +138,33 @@ public class Trie {
 	}
 
 	/**
-     5 * search( trie, str ) returns the string in trie that has the longest (and closest)
+     5 * search( trie, str ) returns the string in trie that has the longest (and strClosest)
      prefix match with str as described in Section 1.2. You may assume that trie is not
     */ 
 
 	public static String search(Trie trie, String str) {
-		return search(trie.root, str, 0);
+		return searchRecurse(trie.root, str, 0);
 	}
 
-	public static String search(Node r, String str, int depth) {
-		if (r == null) return null;
+	public static String searchRecurse(Node r, String str, int i) { //depth i
+		if (r == null) return null;  //base case
 
-		if (r.isLeaf()) return r.element;
+		if (r.isLeaf()) return r.element; // if nodes a leaf you return that element (no more to explore)
 
-		if (str.length() - 1 < depth) return search(r.right, str, depth + 1);
+		if (str.length() - 1 < i) return searchRecurse(r.right, str, i + 1); //search till the end of the string
 
-		if (str.charAt(depth) == '0') {
-			String closest = search(r.left, str, depth + 1);
-			if (closest == null) {
-				closest = search(r.right, str, depth + 1);
+		if (str.charAt(i) == '0') {
+			String strClosest = searchRecurse(r.left, str, i + 1); // if 0 at i then go left with level i+1
+			if (strClosest == null) { // if not try other side
+				strClosest = searchRecurse(r.right, str, i + 1);
 			}
-			return closest;
-		} else {
-			String closest = search(r.right, str, depth + 1);
-			if (closest == null) {
-				closest = search(r.left, str, depth + 1);
+			return strClosest;
+		} else { // if 0 at i then go right with level i+1
+			String strClosest = searchRecurse(r.right, str, i + 1);
+			if (strClosest == null) { // if not try other side
+				strClosest = searchRecurse(r.left, str, i + 1);
 			}
-			return closest;
+			return strClosest;
 		}
 	}
 
@@ -188,8 +186,8 @@ public class Trie {
 	private static int heightRecurse(Node n, int depth) {
 		if (n == null) return depth;
 		return Math.max(
-				heightRecurse(n.left, depth + 1),
-				heightRecurse(n.right, depth + 1));
+			heightRecurse(n.left, depth + 1),
+			heightRecurse(n.right, depth + 1));
 	}
 
 
