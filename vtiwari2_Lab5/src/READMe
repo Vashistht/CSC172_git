@@ -1,0 +1,4 @@
+How to run?
+
+vashisth@erins-ipad src % javac Trie.java -Xlint
+vashisth@erins-ipad src % java Trie /Users/vashisth/Documents/GitHub/CSC172/vtiwari2_Lab5/src/commands

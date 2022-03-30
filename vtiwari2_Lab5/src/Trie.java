@@ -1,3 +1,5 @@
+// some motivation from the 
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
@@ -37,12 +39,12 @@ public class Trie {
     */
 
 	public static boolean insert(Trie trie, String str) {
-		boolean insertBoolean = insertRecurse(trie.root, str, 0);
+		boolean insertBoolean = insert(trie.root, str, 0);
 		return insertBoolean;
 	}
 
-	// feel free to rename to insert I had it so I can debug 
-	private static boolean insertRecurse(Node node, String str, int i) {
+	// (initially this was insertRecurse feel free to rename to insert I had it so I can debug 
+	private static boolean insert(Node node, String str, int i) {
 
 		// Case 1: when empty (leaf and with element null) just add it 
 		if (node.element == null && node.isLeaf()) {
@@ -69,24 +71,24 @@ public class Trie {
 				// add string recursively
 				if (str.charAt(i) == '0') {
 					if (node.left == null) node.left = new Node();
-					return insertRecurse(node.left, str, i + 1); // call recursive function with new depth being i + 1
+					return insert(node.left, str, i + 1); // call recursive function with new depth being i + 1
 				} else {
 					if (node.right == null) node.right = new Node();
-					return insertRecurse(node.right, str, i + 1);
+					return insert(node.right, str, i + 1);
 				}
 			}
 		} else {
 			// not leaf node
 			if (str.charAt(i) == '0') {
 				if (node.left == null) node.left = new Node();
-				return insertRecurse(node.left, str, i + 1); 
+				return insert(node.left, str, i + 1); 
 			} else {
 				if (node.right == null) node.right = new Node();
-				return insertRecurse(node.right, str, i + 1);
+				return insert(node.right, str, i + 1);
 			}
 		}
 	}
-	
+
 	/**
      2 * trieToList( trie ) creates a list of strings in trie in increasing lexicographic
      order. You are not allowed to use any kind of sort methods to sort the list.
@@ -143,26 +145,26 @@ public class Trie {
     */ 
 
 	public static String search(Trie trie, String str) {
-		return searchRecurse(trie.root, str, 0);
+		return search(trie.root, str, 0);
 	}
 
-	public static String searchRecurse(Node r, String str, int depth) {
+	public static String search(Node r, String str, int depth) {
 		if (r == null) return null;
 
 		if (r.isLeaf()) return r.element;
 
-		if (str.length() - 1 < depth) return searchRecurse(r.right, str, depth + 1);
+		if (str.length() - 1 < depth) return search(r.right, str, depth + 1);
 
 		if (str.charAt(depth) == '0') {
-			String closest = searchRecurse(r.left, str, depth + 1);
+			String closest = search(r.left, str, depth + 1);
 			if (closest == null) {
-				closest = searchRecurse(r.right, str, depth + 1);
+				closest = search(r.right, str, depth + 1);
 			}
 			return closest;
 		} else {
-			String closest = searchRecurse(r.right, str, depth + 1);
+			String closest = search(r.right, str, depth + 1);
 			if (closest == null) {
-				closest = searchRecurse(r.left, str, depth + 1);
+				closest = search(r.left, str, depth + 1);
 			}
 			return closest;
 		}
