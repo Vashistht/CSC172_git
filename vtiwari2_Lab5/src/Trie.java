@@ -1,182 +1,241 @@
-public class Trie<Key, E> {
-    public static int key;
-    public String element;
-    public static  Trie<Integer, String> node;
-    public Trie<Key, String> left;
-    public Trie<Key, String> right;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.ArrayList;
+import java.util.Scanner;
 
-    /** constructors for the Trie class*/
-    // constructor 1
-    public Trie() {
-        left = right = null;
-    }
+public class Trie {
+	
+	static class Node {
+		String element;
+		Node left;
+		Node right;
 
-    // constructor 2
-    
-    public Trie(int n, String val) {
-        key = n;
-        element = val;
-        left = right = null;
-    }
+		public Node() { 
+			left = right = null;
+			this.element = null;
+		}
 
-    // constructor 3
-    public Trie(int n, String val, Trie<Key, String> l,  Trie<Key, String> r) {
-        key = n;
-        element = val;
-        left = l;
-        right = r;
-    }
+		public boolean isLeaf() {
+			return left == null && right == null;
+		}
+		
+		public Node(String element) {
+			this.element = element;
+			left = right = null; 
+		}
+	}
 
-    /** getters and setters */
-    //for element
-    public String element(){
-        return element;
-    }
-    public void setElement(String e){
-         element = e;
-    }
+	public Node root;
 
-    //for key n
-    public String key(){
-        return key;
-    }
-    public void setKey(int n){
-        key = n;
-    }
-
-    // for left child
-    public Trie<Key, String> left(){
-        return left;
-    }
-    public void setLeft(Trie<Key, String> s){
-        left = s;
-    }
-
-    // for right child
-    public Trie<Key, String> right(){
-        return right;
-    }
-    public void setRight(Trie<Key, String> s){
-        right = s;
-    }
-
-    /** Know that data will be stored in a leaf of the trie.
-     method to check if its a leaf **/
-    public boolean isLeaf() {
-        return (left == null) && (right == null);
-    }
-
-
-    /**
-     1 * insert( trie, st ) inserts a string st into a non-empty trie trie. Returns either
+	public Trie() { 
+		root = new Node();
+	}
+	
+	/**
+     1 * insert( trie, str ) inserts a string str into a non-empty trie trie. Returns either
      true or false indicating whether or not the insertion is successful.
-     */
-    // lets first make the function that does the insertion work
-    public Trie<Integer, String> insertString(Trie<Integer, String> root, String input, int k) {
-        for (int i = 0; i < input.length(); i++) {
-            if (root == null) {
-                Trie<Integer, String> newNode = new Trie<>(k, input);
-                root = newNode;
-                System.out.println("2 new nodes");
-                return root;
-            } else if (input.compareTo(root.element) != 0) {
-                if (input.charAt(i) == '0') {
-                    root.left = insertString(root.left(), input, k);
-                    System.out.println("test left");
-                } else {  //(input.charAt(i) == '1')
-                    root.right = insertString(root.right(), input, k);
-                    System.out.println("test right");
-                }
-                return root;
-            }
-        }
-        return root;
-    }
+    */
 
-    // should work
-    public boolean insert(String st) {
-        boolean insertBoolean = false;
+	public static boolean insert(Trie trie, String str) {
+		boolean insertBoolean = insertRecurse(trie.root, str, 0);
+		return insertBoolean;
+	}
 
-        for (int i = 0; i < st.length(); i++){
-            // if not 0, 1 then not valid
-            if (st.charAt(i)!= '0' && st.charAt(i)!='1'){
-                System.out.println("Not valid input");
-                return insertBoolean;       //insertBoolean = false
-            }
-            else{
-                insertBoolean = true;
-            }
-        }
-        if (insertBoolean){
-            insertString(node, st, key+1);
-        }
-        key++; // increment the key by 1
-        System.out.println("1 inserted");
-        return insertBoolean;
-    }
+	// feel free to rename to insert I had it so I can debug 
+	private static boolean insertRecurse(Node node, String str, int i) {
 
+		// Case 1: when empty (leaf and with element null) just add it 
+		if (node.element == null && node.isLeaf()) {
+			node.element = str;
+			return true;
+		}
 
-
-
-    /**
+		//case 2: Leaf has a element
+		if (node.isLeaf()) {
+			// 2.1: same element as the string to be added, then insertion is not successful
+			if (str.equals(node.element)) {
+				return false;
+			} 
+			// 2.2 if not the same then we need to add the node, and move it down
+			else {
+				if (node.element.charAt(i) == '0') {
+					// if the node at some depth as string 0, it should be the left node
+					node.left = new Node(node.element); 
+				} else {
+					// if the node at some depth as string 1, it should be the right node
+					node.right = new Node(node.element);
+				}
+				node.element = null; // remove current node element
+				// add string recursively
+				if (str.charAt(i) == '0') {
+					if (node.left == null) node.left = new Node();
+					return insertRecurse(node.left, str, i + 1); // call recursive function with new depth being i + 1
+				} else {
+					if (node.right == null) node.right = new Node();
+					return insertRecurse(node.right, str, i + 1);
+				}
+			}
+		} else {
+			// not leaf node
+			if (str.charAt(i) == '0') {
+				if (node.left == null) node.left = new Node();
+				return insertRecurse(node.left, str, i + 1); 
+			} else {
+				if (node.right == null) node.right = new Node();
+				return insertRecurse(node.right, str, i + 1);
+			}
+		}
+	}
+	
+	/**
      2 * trieToList( trie ) creates a list of strings in trie in increasing lexicographic
      order. You are not allowed to use any kind of sort methods to sort the list.
-     */
-    public void trieToList(Trie<Integer, String> node){
-        if (node == null) {return; }
-        //left side recursion
-        trieToList(node.left());
-        // the node itself
-        System.out.println(node.key() + " " + node.element());
-        //right side recursion
-        trieToList(node.right());
+    */
 
-        /*
-        - Since we know its a bst, left <0, right >= 0 for (node-element)
-        // code
-        String leftElement = node.left().element()
-        String rightElement = node.right().element()
-        if (node.element().compareTo(leftElement) >0){
-            System.out.println(node.element());
-            // recurse on the left side
-        }else if (node.element().compareTo(leftElement) >=0){
-            System.out.println(right.element());
-            // recurse on the right side
-        }
-        */
-    }
+	// Livia's function: changed Alist to ArrayList, append to add
+	// modified so it fits with the nodal structure
+	private static void trieToList(Node node, ArrayList<String> a) {
+		if (node == null) {
+		}else if (node.isLeaf()) {
+			a.add(node.element);
+		} else {
+			trieToList(node.left, a);
+			trieToList(node.right, a);
+		}
+	}
 
-    /**
+	public static ArrayList<String> trieToList(Trie trie) {
+		ArrayList<String> trieArray = new ArrayList();
+		trieToList(trie.root, trieArray);
+		return trieArray;
+	}
+
+	public static void print(ArrayList<String> list){
+		for (int i = 0; i < list.size(); i++) { 
+				System.out.print(list.get(i) + " "); 
+			}   
+			System.out.println(); 
+			}
+
+	/**
      3 * largest( trie ) returns the largest string in lexicographic order from the set of
      strings stored in trie. You can assume that trie is not empty.
-     */
+    */
+	public static String largest(Trie trie) {
+		ArrayList<String> list = new ArrayList<String>();
+		trieToList(trie.root, list);
+		return list.get(list.size()-1);
+	}
 
-
-    /**
+	/**
      4 * smallest( trie ) returns the smallest string in lexicographic order from the set
      of strings stored in trie. You may assume that trie is not empty.
-     */
+    */
+	public static String smallest(Trie trie) {
+		ArrayList<String> list = new ArrayList<String>();
+		trieToList(trie.root, list);
+		return list.get(0);
+	}
 
-    /**
-     5 * search( trie, st ) returns the string in trie that has the longest (and closest)
-     prefix match with st as described in Section 1.2. You may assume that trie is not
-     */ 
-    // NOT DONE AT ALL RIP
-    // all u need is the actual root (or what I called node stupidly) you dont need the Trie thing but they want it so I added it 
-    public String search(Trie<Integer, String> node, String input){
-        String result;
-        Trie<Integer, String>pointer = node;
-        int currentHeigth, oldMatch = 0;
-        for (currentHeigth = 0; currentHeigth< input.length();currentHeigth++ ){
-        }
-        return result; 
+	/**
+     5 * search( trie, str ) returns the string in trie that has the longest (and closest)
+     prefix match with str as described in Section 1.2. You may assume that trie is not
+    */ 
 
-    }
-    /**
+	public static String search(Trie trie, String str) {
+		return searchRecurse(trie.root, str, 0);
+	}
+
+	public static String searchRecurse(Node r, String str, int depth) {
+		if (r == null) return null;
+
+		if (r.isLeaf()) return r.element;
+
+		if (str.length() - 1 < depth) return searchRecurse(r.right, str, depth + 1);
+
+		if (str.charAt(depth) == '0') {
+			String closest = searchRecurse(r.left, str, depth + 1);
+			if (closest == null) {
+				closest = searchRecurse(r.right, str, depth + 1);
+			}
+			return closest;
+		} else {
+			String closest = searchRecurse(r.right, str, depth + 1);
+			if (closest == null) {
+				closest = searchRecurse(r.left, str, depth + 1);
+			}
+			return closest;
+		}
+	}
+
+	/**
      6 * size( trie ) returns the number of strings stored in the trie.
      */
+	public static int size(Trie trie) {
+		ArrayList<String> list = new ArrayList<String>();
+		trieToList(trie.root, list);
+		return list.size();
+	}
 
-    /**
+	/**
      7 * height( trie ) returns the height of the trie.
-     */
+    */
+	public static int height(Trie trie) {
+		return heightRecurse(trie.root, 0);
+	}
+	private static int heightRecurse(Node n, int depth) {
+		if (n == null) return depth;
+		return Math.max(
+				heightRecurse(n.left, depth + 1),
+				heightRecurse(n.right, depth + 1));
+	}
+
+
+	public static void main(String[] args) throws Exception {
+
+
+		Trie trie = new Trie();
+		File commands = new File(args[0]);
+		try (Scanner strings = new Scanner(commands)) {
+			while (strings.hasNextLine()) {
+				String commandSingle = strings.nextLine();
+				/** split when one or many white spaces and add them as elements of the list
+				// first element decides the action,
+				// second (if present) where that action would take place 
+				*/
+				String[] commandsSeparated = commandSingle.trim().split("\\s+"); 
+
+				if (commandsSeparated[0].equals("insert")){
+					insert(trie, commandsSeparated[1]);
+				}
+			   		   
+				else if (commandsSeparated[0].equals("search")){
+					System.out.println(search(trie, commandsSeparated[1]));
+				}
+			   
+				else if (commandsSeparated[0].equals("height")){
+					System.out.println(height(trie)); 
+				}
+
+			   
+				else if (commandsSeparated[0].equals("size")){
+					System.out.println(size(trie));
+				}
+			   
+				else if (commandsSeparated[0].equals("largest")){
+					System.out.println(largest(trie)); 
+				}
+				else if (commandsSeparated[0].equals("smallest")){
+					System.out.println(smallest(trie)); 
+				}
+				else if (commandsSeparated[0].equals("print")){
+					print(trieToList(trie));
+				}
+			   
+			}
+		}
+		catch (FileNotFoundException e) {
+            System.out.printf("Sorry, your file was not found", e);  
+        }
+	}
 }

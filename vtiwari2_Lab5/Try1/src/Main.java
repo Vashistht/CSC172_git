@@ -7,7 +7,7 @@ import java.util.Scanner;
 public class Main{
 
     public static void main(String[] args) { //throws FileNotFoundException 
-        Trie<Integer, String> nodes = new Trie<>();
+        Trie nodes = new Trie ();
         File commands= new File(args[0]);
 
         try (Scanner strings = new Scanner(commands)) {
