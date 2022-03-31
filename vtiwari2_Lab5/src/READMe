@@ -44,7 +44,35 @@ The largest function returns the last element of the arraylist created from the 
 -smallest:
 The smallest function returns the first element of the arraylist created from the trie. This is the smallest string in lexicographic order from the trie.
 
+search:
+The search function calls searchRecurse, starting at 0 (which represents the root).
+This finds the longest prefix match with a given string.
 
+searchRecurse:
+The searchRecurse function looks for a given string, operating recursively on the index of characters in that string.
+We have base cases:
+  -if the node is null, null is returned (this string is not found)
+  -if the node is a leaf, then the longest prefix match with the provided string is found and the element of this leaf is returned.
+-if the length of this string is < the index of a character, we continue search, calling this function on index i+1.
+-if the character at index i is 0, we call searchRecurse on the left child; 
+-if the character at index i is 1, we call searchRecurse on the right child;
+
+size:
+The size function returns the number of strings stored in the trie by using trieToList and returning the size of the arrayList
+
+height:
+The height function calls heighRecurse, starting at 0 (representing the root).
+
+heightRecurse:
+The heightRecurse function operates recursively on the depth of the tree. We have base case:
+-if n is null, then the depth is return.
+Otherwise, the max of the heigh of the left and right subtries are taken.
+
+Lab5 class:
+The Lab5 class has the main method that scans the input in the command line.
+The main method first constructs a trie on which to operate. At first, this is just a trie with a root node (that is empty).
+The main method has cases, calling search, insert, largest, smallest, trieToList on the trie, depending on the commands in the command file.
+The results are printed out.
 
 How to run?
 
