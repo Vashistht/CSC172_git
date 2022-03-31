@@ -1,4 +1,52 @@
+Project 01
+Lab Partners: Vashisth Tiwari (vtiwari2), Livia Betti (lbetti)
+
+Vashisth Tiwari:
+Student ID: 31564441
+Email: vtiwari2@u.rochester.edu
+
+Livia Betti:
+Student ID: 31568890
+Email: lbetti@u.rochester.edu
+
+We have two classes: the Trie class and the Lab5 class.
+
+The Trie class has a subclass Node, which has variables left, right, and element.
+The left variable represents a pointer to the left child, the right variable represents a pointer to the right child.
+The element is the string element that the Node has.
+The Node class also has a method isLeaf to see when the node is a leaf.
+
+For the overall trie class, we have instance variable root, representing the root of the trie.
+The constructor for the trie class creates a root node. 
+
+insert:
+The insert function calls the insertRecurse functions, starting at 0 (representing the root).
+
+insertRecurse:
+The insertRecurse function operates recursively on the index of the string we are trying to insert. We have two bases cases:
+  -if the node is a leaf and is empty, then the insertRecurse function adds the desired string to this location.
+  -if the node is a leaf, but is not empty, then we have 2 subcases:
+    -if the leaf has the same element as we are trying to insert, then we return false and the insert is not successful
+    -if the leaf has a different element, then we continue comparing the characters in the strings of the one we are trying to insert and the element of the leaf node. 
+        We call insertRecurse to add this string recursively.
+  -if the node is not a leaf node, we move to the left if the character at this index is 0, and to the right if the character at this index is 1.
+
+-trieToList:
+The trieToList(Node node, ArrayList<String> a) function recursively adds the nodes of the trie to a. This starts by looking at the left children, then the right children of each node.
+The trieToList(Trie trie) function constructs an ArrayList trieArray and opperates trieToList(trie.root, trieArray) to insert the elements of the trie into trieArray.
+
+-print:
+The print function prints the elements of an ArrayList. This is used to print the elements of the trieArray
+
+-largest:
+The largest function returns the last element of the arraylist created from the trie. This is the largest string in lexicographic order from the trie.
+
+-smallest:
+The smallest function returns the first element of the arraylist created from the trie. This is the smallest string in lexicographic order from the trie.
+
+
+
 How to run?
 
-vashisth@erins-ipad src % javac Trie.java -Xlint
-vashisth@erins-ipad src % java Trie /Users/vashisth/Documents/GitHub/CSC172/vtiwari2_Lab5/src/commands
+javac Lab5.java -Xlint
+java Lab5 commands.txt
