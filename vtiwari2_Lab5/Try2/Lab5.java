@@ -4,7 +4,7 @@ import java.util.Scanner;
 
 public class Lab5 {
     public static void main(String[] args) throws Exception {
-		Trie trie = new Trie();
+		Trie1 trie = new Trie1();
 		File commands = new File(args[0]);
 		try (Scanner strings = new Scanner(commands)) {
 			while (strings.hasNextLine()) {

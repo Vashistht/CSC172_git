@@ -1,4 +1,8 @@
+
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class Trie {
 
@@ -33,12 +37,12 @@ public class Trie {
      true or false indicating whether or not the insertion is successful.
     */
 
-	public boolean insert(Trie trie, String str) {
+	public static boolean insert(Trie trie, String str) {
 		return insertRecurse(trie.root, str, 0); // returns a bool depending on true or false from insertRecurse method define
 	}
 
 	// (initially this was insertRecurse feel free to rename to insert I had it so I can debug 
-	private boolean insertRecurse(Node node, String str, int i) {
+	private static boolean insertRecurse(Node node, String str, int i) {
 
 		// Case 1: when empty (leaf and with element null) just add it 
 		if (node.element == null && node.isLeaf()) {
@@ -100,13 +104,13 @@ public class Trie {
 		}
 	}
 
-	public ArrayList<String> trieToList(Trie trie) {
-		ArrayList<String> trieArray = new ArrayList<>();
+	public static ArrayList<String> trieToList(Trie trie) {
+		ArrayList<String> trieArray = new ArrayList();
 		trieToList(trie.root, trieArray);
 		return trieArray;
 	}
 
-	public void print(ArrayList<String> list){
+	public static void print(ArrayList<String> list){
 		for (int i = 0; i < list.size(); i++) { 
 				System.out.print(list.get(i) + " "); 
 			}   
@@ -117,7 +121,7 @@ public class Trie {
      3 * largest( trie ) returns the largest string in lexicographic order from the set of
      strings stored in trie. You can assume that trie is not empty.
     */
-	public String largest(Trie trie) {
+	public static String largest(Trie trie) {
 		ArrayList<String> list = new ArrayList<String>();
 		trieToList(trie.root, list);
 		return list.get(list.size()-1);
@@ -127,7 +131,7 @@ public class Trie {
      4 * smallest( trie ) returns the smallest string in lexicographic order from the set
      of strings stored in trie. You may assume that trie is not empty.
     */
-	public String smallest(Trie trie) {
+	public static String smallest(Trie trie) {
 		ArrayList<String> list = new ArrayList<String>();
 		trieToList(trie.root, list);
 		return list.get(0);
@@ -138,7 +142,7 @@ public class Trie {
      prefix match with str as described in Section 1.2. You may assume that trie is not
     */ 
 
-	public String search(Trie trie, String str) {
+	public static String search(Trie trie, String str) {
 		return searchRecurse(trie.root, str, 0);
 	}
 
@@ -167,7 +171,7 @@ public class Trie {
 	/**
      6 * size( trie ) returns the number of strings stored in the trie.
      */
-	public int size(Trie trie) {
+	public static int size(Trie trie) {
 		ArrayList<String> list = new ArrayList<String>();
 		trieToList(trie.root, list);
 		return list.size();
@@ -176,7 +180,7 @@ public class Trie {
 	/**
      7 * height( trie ) returns the height of the trie.
     */
-	public int height(Trie trie) {
+	public static int height(Trie trie) {
 		return heightRecurse(trie.root, 0);
 	}
 	private static int heightRecurse(Node n, int depth) {
@@ -184,5 +188,54 @@ public class Trie {
 		return Math.max(
 			heightRecurse(n.left, depth + 1),
 			heightRecurse(n.right, depth + 1));
+	}
+
+
+	public static void main(String[] args) throws Exception {
+
+
+		Trie trie = new Trie();
+		File commands = new File(args[0]);
+		try (Scanner strings = new Scanner(commands)) {
+			while (strings.hasNextLine()) {
+				String commandSingle = strings.nextLine();
+				/** split when one or many white spaces and add them as elements of the list
+				// first element decides the action,
+				// second (if present) where that action would take place 
+				*/
+				String[] commandsSeparated = commandSingle.trim().split("\\s+"); 
+
+				if (commandsSeparated[0].equals("insert")){
+					insert(trie, commandsSeparated[1]);
+				}
+			   		   
+				else if (commandsSeparated[0].equals("search")){
+					System.out.println(search(trie, commandsSeparated[1]));
+				}
+			   
+				else if (commandsSeparated[0].equals("height")){
+					System.out.println(height(trie)); 
+				}
+
+			   
+				else if (commandsSeparated[0].equals("size")){
+					System.out.println(size(trie));
+				}
+			   
+				else if (commandsSeparated[0].equals("largest")){
+					System.out.println(largest(trie)); 
+				}
+				else if (commandsSeparated[0].equals("smallest")){
+					System.out.println(smallest(trie)); 
+				}
+				else if (commandsSeparated[0].equals("print")){
+					print(trieToList(trie));
+				}
+			   
+			}
+		}
+		catch (FileNotFoundException e) {
+            System.out.printf("Sorry, your file was not found", e);  
+        }
 	}
 }

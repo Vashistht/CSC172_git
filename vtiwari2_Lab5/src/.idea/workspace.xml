@@ -5,8 +5,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a7a95c3f-bae2-4b6f-8fee-49d55730634f" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/Main.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Lab5.java" beforeDir="false" afterPath="$PROJECT_DIR$/Lab5.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Trie$Node.class" beforeDir="false" afterPath="$PROJECT_DIR$/Trie$Node.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Trie.class" beforeDir="false" afterPath="$PROJECT_DIR$/Trie.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Trie.java" beforeDir="false" afterPath="$PROJECT_DIR$/Trie.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Trie1.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Tries$Node.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Tries.class" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -41,6 +47,7 @@
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
+    <property name="nodejs_package_manager_path" value="npm" />
   </component>
   <component name="RunManager">
     <configuration name="Tries.java" type="Application" factoryName="Application">
@@ -62,6 +69,7 @@
       <updated>1648662190769</updated>
       <workItem from="1648662192162" duration="730000" />
       <workItem from="1648663004872" duration="2226000" />
+      <workItem from="1648771105328" duration="144000" />
     </task>
     <servers />
   </component>
