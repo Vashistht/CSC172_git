@@ -73,7 +73,7 @@ public class Sorting {
       return a;
   }
 
-  public static int[] insertSort(int[] a){
+  public static int[] insertionSort(int[] a){
     for (int i = 0; i < a.length; i++){
         int j = i;
         while ((j > 0) && (a[j] < a[j-1])){
@@ -86,7 +86,7 @@ public class Sorting {
     return a;
   }
 
-  public static int[] mergesort(int[] a) {
+  public static int[] mergeSort(int[] a) {
     if (a.length <= 1) {
         return a;
     }
@@ -103,8 +103,8 @@ public class Sorting {
         a2[i - mid] = a[i];
     }
 
-    a1 = mergesort(a1);
-    a2 = mergesort(a2);
+    a1 = mergeSort(a1);
+    a2 = mergeSort(a2);
 
     return mergeArray(a1, a2);
   }
@@ -150,33 +150,38 @@ public class Sorting {
     return i+1;
   }
 
-public static int[] qSort(int[] a, int l, int r) {
+public static int[] quickSort(int[] a, int l, int r) {
     int piv = (l + r) / 2;
     a = swap(a, r, piv);
     int k = partition(a, l, r);
     a = swap(a, k, r);
 
     if ((k - l) > 1) {
-        qSort(a, l, k);
+        quickSort(a, l, k);
     }
     if ((r - k) > 1) {
-        qSort(a, k + 1, r);
+        quickSort(a, k + 1, r);
     }
     return a;
   }
 
-  public static int[] qSort(int[] a) {
-    return qSort(a, 0, a.length - 1);
+  public static int[] defaultSort(int[] a){
+    Arrays.sort(a);
+    return a;
+  }
+
+  public static int[] quickSort(int[] a) {
+    return quickSort(a, 0, a.length - 1);
   }
 
  /**
      * 
      * Sorts the numbers present in the file based on the algorithm provided.
-     * 0 = Arrays.sort() (Java Default)
+     * 0 = defaultSort() (Java Default)
      * 1 = Bubble Sort
      * 2 = Selection Sort 
      * 3 = Insertion Sort 
-     * 4 = Mergesort
+     * 4 = mergeSort
      * 5 = Quicksort
      *
      * @param args the command-line arguments
@@ -188,7 +193,7 @@ public static int[] qSort(int[] a, int l, int r) {
 		  // Storing file input in an array
         int[] a = in.readAllInts();
         int[] b = a;
-        Arrays.sort(b);
+        defaultSort(b);
         int[] c = new int[b.length];
         for (int i = 0; i < b.length; i++){
           c[i] = b[b.length - 1 - i];
@@ -196,7 +201,7 @@ public static int[] qSort(int[] a, int l, int r) {
         int[] d = swap(a);
 
         // TODO: Generate 3 other arrays, b, c, d where
-        // b contains sorted integers from a (You can use Java Arrays.sort() method)
+        // b contains sorted integers from a (You can use Java defaultSort() method)
         // c contains all integers stored in reverse order 
         // (you can have your own O(n) solution to get c from b
         // d contains almost sorted array 
@@ -205,11 +210,11 @@ public static int[] qSort(int[] a, int l, int r) {
         //TODO: 
         int num = Integer.parseInt(args[1]);
         // Read the second argument and based on input select the sorting algorithm
-        //  * 0 = Arrays.sort() (Java Default)
+        //  * 0 = defaultSort() (Java Default)
         //  * 1 = Bubble Sort
         //  * 2 = Selection Sort 
         //  * 3 = Insertion Sort 
-        //  * 4 = Mergesort
+        //  * 4 = mergeSort
         //  * 5 = Quicksort
         //  Perform sorting on a,b,c,d. Pring runtime for each case along with timestamp and record those. 
         // For runtime and priting, you can use the same code from Lab 4 as follows:
@@ -223,14 +228,14 @@ public static int[] qSort(int[] a, int l, int r) {
 
         switch (num){
           case 0:
-            String algorithmUsed = "Arrays.sort()";
+            String algorithmUsed = "defaultSort()";
             int[] a0 = a;
             int[] b0 = b;
             int[] c0 = c;
             int[] d0 = d;
 
             timer = new Stopwatch();
-            Arrays.sort(a0);
+            defaultSort(a0);
             time = timer.elapsedTimeMillis();
             timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(Calendar.getInstance().getTime());
             arrayUsed = "a";
@@ -243,7 +248,7 @@ public static int[] qSort(int[] a, int l, int r) {
             StdOut.printf("%s %s %8.1f   %s  %s  %s\n", algorithmUsed, arrayUsed, time, timeStamp, netID, args[0]);
 
             timer = new Stopwatch();
-            Arrays.sort(b0);
+            defaultSort(b0);
             time = timer.elapsedTimeMillis();
             timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(Calendar.getInstance().getTime());
             arrayUsed = "b";
@@ -256,7 +261,7 @@ public static int[] qSort(int[] a, int l, int r) {
             StdOut.printf("%s %s %8.1f   %s  %s  %s\n", algorithmUsed, arrayUsed, time, timeStamp, netID, args[0]);
 
             timer = new Stopwatch();
-            Arrays.sort(c0);
+            defaultSort(c0);
             time = timer.elapsedTimeMillis();
             timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(Calendar.getInstance().getTime());
             arrayUsed = "c";
@@ -269,7 +274,7 @@ public static int[] qSort(int[] a, int l, int r) {
             StdOut.printf("%s %s %8.1f   %s  %s  %s\n", algorithmUsed, arrayUsed, time, timeStamp, netID, args[0]);
 
             timer = new Stopwatch();
-            Arrays.sort(d0);
+            defaultSort(d0);
             time = timer.elapsedTimeMillis();
             timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(Calendar.getInstance().getTime());
             arrayUsed = "d";
@@ -407,7 +412,7 @@ public static int[] qSort(int[] a, int l, int r) {
             int[] d3 = d;
 
             timer = new Stopwatch();
-            insertSort(a3);
+            insertionSort(a3);
             time = timer.elapsedTimeMillis();
             timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(Calendar.getInstance().getTime());
             arrayUsed = "a";
@@ -420,7 +425,7 @@ public static int[] qSort(int[] a, int l, int r) {
             StdOut.printf("%s %s %8.1f   %s  %s  %s\n", algorithmUsed, arrayUsed, time, timeStamp, netID, args[0]);
 
             timer = new Stopwatch();
-            insertSort(b3);
+            insertionSort(b3);
             time = timer.elapsedTimeMillis();
             timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(Calendar.getInstance().getTime());
             arrayUsed = "b";
@@ -433,7 +438,7 @@ public static int[] qSort(int[] a, int l, int r) {
             StdOut.printf("%s %s %8.1f   %s  %s  %s\n", algorithmUsed, arrayUsed, time, timeStamp, netID, args[0]);
 
             timer = new Stopwatch();
-            insertSort(c3);
+            insertionSort(c3);
             time = timer.elapsedTimeMillis();
             timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(Calendar.getInstance().getTime());
             arrayUsed = "c";
@@ -446,7 +451,7 @@ public static int[] qSort(int[] a, int l, int r) {
             StdOut.printf("%s %s %8.1f   %s  %s  %s\n", algorithmUsed, arrayUsed, time, timeStamp, netID, args[0]);
 
             timer = new Stopwatch();
-            insertSort(d3);
+            insertionSort(d3);
             time = timer.elapsedTimeMillis();
             timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(Calendar.getInstance().getTime());
             arrayUsed = "d";
@@ -466,7 +471,7 @@ public static int[] qSort(int[] a, int l, int r) {
             int[] d4 = d;
 
             timer = new Stopwatch();
-            mergesort(a4);
+            mergeSort(a4);
             time = timer.elapsedTimeMillis();
             timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(Calendar.getInstance().getTime());
             arrayUsed = "a";
@@ -479,7 +484,7 @@ public static int[] qSort(int[] a, int l, int r) {
             StdOut.printf("%s %s %8.1f   %s  %s  %s\n", algorithmUsed, arrayUsed, time, timeStamp, netID, args[0]);
 
             timer = new Stopwatch();
-            mergesort(b4);
+            mergeSort(b4);
             time = timer.elapsedTimeMillis();
             timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(Calendar.getInstance().getTime());
             arrayUsed = "b";
@@ -492,7 +497,7 @@ public static int[] qSort(int[] a, int l, int r) {
             StdOut.printf("%s %s %8.1f   %s  %s  %s\n", algorithmUsed, arrayUsed, time, timeStamp, netID, args[0]);
 
             timer = new Stopwatch();
-            mergesort(c4);
+            mergeSort(c4);
             time = timer.elapsedTimeMillis();
             timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(Calendar.getInstance().getTime());
             arrayUsed = "c";
@@ -505,7 +510,7 @@ public static int[] qSort(int[] a, int l, int r) {
             StdOut.printf("%s %s %8.1f   %s  %s  %s\n", algorithmUsed, arrayUsed, time, timeStamp, netID, args[0]);
 
             timer = new Stopwatch();
-            mergesort(d4);
+            mergeSort(d4);
             time = timer.elapsedTimeMillis();
             timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(Calendar.getInstance().getTime());
             arrayUsed = "d";
@@ -525,7 +530,7 @@ public static int[] qSort(int[] a, int l, int r) {
             int[] d5 = d;
 
             timer = new Stopwatch();
-            qSort(a5);
+            quickSort(a5);
             time = timer.elapsedTimeMillis();
             timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(Calendar.getInstance().getTime());
             arrayUsed = "a";
@@ -538,7 +543,7 @@ public static int[] qSort(int[] a, int l, int r) {
             StdOut.printf("%s %s %8.1f   %s  %s  %s\n", algorithmUsed, arrayUsed, time, timeStamp, netID, args[0]);
 
             timer = new Stopwatch();
-            qSort(b5);
+            quickSort(b5);
             time = timer.elapsedTimeMillis();
             timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(Calendar.getInstance().getTime());
             arrayUsed = "b";
@@ -551,7 +556,7 @@ public static int[] qSort(int[] a, int l, int r) {
             StdOut.printf("%s %s %8.1f   %s  %s  %s\n", algorithmUsed, arrayUsed, time, timeStamp, netID, args[0]);
 
             timer = new Stopwatch();
-            qSort(c5);
+            quickSort(c5);
             time = timer.elapsedTimeMillis();
             timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(Calendar.getInstance().getTime());
             arrayUsed = "c";
@@ -564,7 +569,7 @@ public static int[] qSort(int[] a, int l, int r) {
             StdOut.printf("%s %s %8.1f   %s  %s  %s\n", algorithmUsed, arrayUsed, time, timeStamp, netID, args[0]);
 
             timer = new Stopwatch();
-            qSort(d5);
+            quickSort(d5);
             time = timer.elapsedTimeMillis();
             timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(Calendar.getInstance().getTime());
             arrayUsed = "d";
