@@ -1,4 +1,4 @@
-# CSC172- Project 2
+# CSC172- Project 3
 Lab-Partners: Vashisth Tiwari, Livia Betti
 
 Vashisth Tiwari:
