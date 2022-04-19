@@ -47,7 +47,8 @@ The code was tested using the sample commands and files provided by Professor Zh
 (4) java StopContagion -r 2 6 Sample_input2
 
 ## Extra credit: 
-- run the StopContagionDisplay File
+- run the ContagionGraphics File
 (1) cd src
-(2) javac StopContagionDisplay.java
-(3) java StopContagionDisplay
+(2) javac ContagionGraphics.java
+(3) java ContagionGraphics (your commands, the input file)
+
