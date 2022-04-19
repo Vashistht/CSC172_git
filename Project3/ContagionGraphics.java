@@ -104,13 +104,6 @@ public class ContagionGraphics extends JComponent{
         }
 
         Graphics2D g2d = (Graphics2D) g;
-        for (int i = 1; i < myGraph.numNodes + 1; i++){
-            for (int j = 1; j < myGraph.numNodes; j++){
-                if (myGraph.checkAdj(i,j) == true){
-                    g2d.drawLine(30 + xCoord[i], 30 + yCoord[i], 30 + xCoord[j], 30 + yCoord[j]);
-                }
-            }
-        }
 
         for (int i = 1; i < myGraph.numNodes + 1; i++){
             g.setColor(Color.lightGray);
@@ -118,6 +111,15 @@ public class ContagionGraphics extends JComponent{
             g2d.fill(circle);
             g2d.setColor(Color.BLACK);
             g2d.drawString(Integer.toString(i), 20 + xCoord[i], 30 + yCoord[i]);
+        }
+
+        for (int i = 1; i < myGraph.numNodes + 1; i++){
+            for (int j = 1; j < myGraph.numNodes; j++){
+                if (myGraph.checkAdj(i,j) == true){
+                    g2d.setColor(new Color((100 + 20*i + 20*j) % 255 , (100 + 30*i + 30*j) % 255, (100 + 10*i + 10*j) % 255));
+                    g2d.drawLine(30 + xCoord[i], 30 + yCoord[i], 30 + xCoord[j], 30 + yCoord[j]);
+                }
+            }
         }
     }
 
