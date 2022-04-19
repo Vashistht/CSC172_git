@@ -12,7 +12,7 @@ Student ID: 31568890
 Net ID: lbetti
 
 ## Description of the code (StopContagion)
-A program that allows the user to dismantle a network given the collection influence of some node.
+A program that allows the user to dismantle a network given the collection influence for a given radius, degree of some node.
 
 StopContagion
     - Graph type that stores the number of nodes and the adjacency matrix representation
